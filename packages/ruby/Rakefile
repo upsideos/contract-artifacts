@@ -1,0 +1,34 @@
+# frozen_string_literal: true
+
+require 'rake/testtask'
+
+desc 'Copy ABIs, manifests and verification sources out of releases/'
+task :prepare do
+  ruby 'script/prepare_data.rb'
+end
+
+desc 'Fail when the gem data is missing or incomplete'
+task :check_data do
+  releases = %w[v5 v5.1 recallable-payment]
+  missing = releases.reject do |release|
+    File.file?("data/#{release}/manifest.json") &&
+      File.file?("data/#{release}/verification-source-codes.json") &&
+      !Dir["data/#{release}/abi/*.json"].empty?
+  end
+  raise "Run `rake prepare` first. Incomplete: #{missing.join(', ')}" unless missing.empty?
+end
+
+Rake::TestTask.new(:test) do |t|
+  t.libs = %w[lib test]
+  t.test_files = FileList['test/**/*_test.rb']
+  t.warning = false
+end
+
+task test: %i[prepare check_data]
+
+desc 'Build the gem'
+task build: %i[prepare check_data] do
+  sh 'gem build evm_rwa_artifacts.gemspec'
+end
+
+task default: :test

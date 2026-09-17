@@ -42,6 +42,19 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  ruby:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/ruby
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+      - run: rake test
+      - run: rake build
+
   audit-releases:
     runs-on: ubuntu-latest
     steps:

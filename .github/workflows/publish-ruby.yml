@@ -1,0 +1,81 @@
+name: Publish artifacts gem to RubyGems
+
+on:
+  push:
+    tags:
+      - ruby@*
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (skip actual publish)'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/ruby
+    permissions:
+      # Required for RubyGems trusted publishing.
+      id-token: write
+      contents: read
+    env:
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+
+      - name: Copy release data into the gem
+        run: rake prepare
+
+      - name: Test
+        run: rake test
+
+      - name: Check the tag against the gem version
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          GEM_VERSION=$(ruby -Ilib -e 'require "evm_rwa_artifacts/version"; print EvmRwaArtifacts::VERSION')
+          if [[ "$EVENT_NAME" == "push" ]]; then
+            if [[ ! "$REF_NAME" =~ ^ruby@([0-9]+\.[0-9]+\.[0-9A-Za-z\.-]+)$ ]]; then
+              echo "Tag format must be ruby@<version>" >&2
+              exit 1
+            fi
+            VERSION="${BASH_REMATCH[1]}"
+            if [[ "$GEM_VERSION" != "$VERSION" ]]; then
+              echo "Tag version ($VERSION) does not match gem version ($GEM_VERSION)" >&2
+              exit 1
+            fi
+          fi
+          echo "Publishing evm_rwa_artifacts $GEM_VERSION"
+
+      - name: Build
+        run: gem build evm_rwa_artifacts.gemspec
+
+      # Trusted publishing exchanges the GitHub OIDC token for a short-lived
+      # RubyGems key, so the workflow holds no long-lived credentials.
+      - name: Configure RubyGems credentials
+        if: ${{ env.DRY_RUN != 'true' }}
+        uses: rubygems/configure-rubygems-credentials@v2.1.0
+
+      - name: Publish to RubyGems (dry run)
+        if: ${{ env.DRY_RUN == 'true' }}
+        run: gem spec ./*.gem --ruby
+
+      - name: Publish to RubyGems
+        if: ${{ env.DRY_RUN != 'true' }}
+        run: gem push ./*.gem
