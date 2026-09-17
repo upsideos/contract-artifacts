@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'lib/evm_rwa_artifacts/version'
+require_relative 'lib/upsideos_evm_rwa_artifacts/version'
 
 Gem::Specification.new do |spec|
-  spec.name = 'evm_rwa_artifacts'
-  spec.version = EvmRwaArtifacts::VERSION
+  spec.name = 'upsideos_evm_rwa_artifacts'
+  spec.version = UpsideosEvmRwaArtifacts::VERSION
   spec.authors = ['Upside']
   spec.summary = 'ABIs and verification sources for audited EVM contract releases'
   spec.description = <<~TEXT.strip

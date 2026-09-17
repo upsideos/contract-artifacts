@@ -48,7 +48,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           REF_NAME: ${{ github.ref_name }}
         run: |
-          GEM_VERSION=$(ruby -Ilib -e 'require "evm_rwa_artifacts/version"; print EvmRwaArtifacts::VERSION')
+          GEM_VERSION=$(ruby -Ilib -e 'require "upsideos_evm_rwa_artifacts/version"; print UpsideosEvmRwaArtifacts::VERSION')
           if [[ "$EVENT_NAME" == "push" ]]; then
             if [[ ! "$REF_NAME" =~ ^ruby@([0-9]+\.[0-9]+\.[0-9A-Za-z\.-]+)$ ]]; then
               echo "Tag format must be ruby@<version>" >&2
@@ -60,7 +60,7 @@ jobs:
               exit 1
             fi
           fi
-          echo "Publishing evm_rwa_artifacts $GEM_VERSION"
+          echo "Publishing upsideos_evm_rwa_artifacts $GEM_VERSION"
 
       - name: Build
         run: rake build

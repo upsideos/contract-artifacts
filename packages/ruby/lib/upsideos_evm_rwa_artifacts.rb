@@ -3,13 +3,13 @@
 require 'json'
 require 'pathname'
 
-require_relative 'evm_rwa_artifacts/version'
+require_relative 'upsideos_evm_rwa_artifacts/version'
 
 # ABIs and verification sources for audited EVM contract releases.
 #
 # The gem carries data only. It has no dependencies and runs no code at
 # load time beyond reading the release directory.
-module EvmRwaArtifacts
+module UpsideosEvmRwaArtifacts
   RELEASES = %w[v5 v5.1 recallable-payment].freeze
 
   class Error < StandardError; end

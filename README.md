@@ -7,7 +7,7 @@ Bytecode, ABIs and verification sources for audited Upside contract releases.
 | [`@upsideos/evm-rwa-artifacts`](https://www.npmjs.com/package/@upsideos/evm-rwa-artifacts) | EVM Security Token v5, v5.1 and Recallable Payment |
 | [`@upsideos/contract-artifacts-cli`](./packages/cli) | Verify a release and check a deployed contract |
 | [`@upsideos/evm-explorer-verify`](./packages/explorer-verify) | Submit a deployment for source verification on a block explorer |
-| [`evm_rwa_artifacts`](./packages/ruby) | Ruby gem with the same ABIs and verification sources |
+| [`upsideos_evm_rwa_artifacts`](./packages/ruby) | Ruby gem with the same ABIs and verification sources |
 
 Every release directory in [`releases/`](./releases) is committed here, so the
 published bytes are reviewable in git as well as in the npm tarball.
@@ -46,16 +46,16 @@ merged ABI, not the token ABI alone.
 
 ## Ruby
 
-The [`evm_rwa_artifacts`](./packages/ruby) gem carries the same ABIs and
+The [`upsideos_evm_rwa_artifacts`](./packages/ruby) gem carries the same ABIs and
 verification sources, built from the same audited commit. It ships no bytecode
 and no tooling, because a Ruby consumer reads contracts and verifies them but
 does not deploy them.
 
 ```ruby
-require 'evm_rwa_artifacts'
+require 'upsideos_evm_rwa_artifacts'
 
-EvmRwaArtifacts.merged_abi('v5', 'RestrictedLockupToken')
-EvmRwaArtifacts.verification_source_codes_path('v5')
+UpsideosEvmRwaArtifacts.merged_abi('v5', 'RestrictedLockupToken')
+UpsideosEvmRwaArtifacts.verification_source_codes_path('v5')
 ```
 
 ## Check a deployed contract
@@ -151,7 +151,7 @@ registry credentials exist in this repository:
 - `evm@x.y.z` publishes `@upsideos/evm-rwa-artifacts` to npm
 - `cli@x.y.z` publishes `@upsideos/contract-artifacts-cli` to npm
 - `explorer@x.y.z` publishes `@upsideos/evm-explorer-verify` to npm
-- `ruby@x.y.z` publishes `evm_rwa_artifacts` to RubyGems
+- `ruby@x.y.z` publishes `upsideos_evm_rwa_artifacts` to RubyGems
 
 ## Solana and Sui
 

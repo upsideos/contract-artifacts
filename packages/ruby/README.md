@@ -1,4 +1,4 @@
-# evm_rwa_artifacts
+# upsideos_evm_rwa_artifacts
 
 ABIs and verification sources for the audited EVM Security Token releases.
 
@@ -9,7 +9,7 @@ same audited commit.
 ## Install
 
 ```ruby
-gem 'evm_rwa_artifacts'
+gem 'upsideos_evm_rwa_artifacts'
 ```
 
 ## Releases
@@ -23,17 +23,17 @@ gem 'evm_rwa_artifacts'
 ## Read an ABI
 
 ```ruby
-require 'evm_rwa_artifacts'
+require 'upsideos_evm_rwa_artifacts'
 
-EvmRwaArtifacts.abi('v5', 'TransferRules')
-EvmRwaArtifacts.abi('v5.1', 'IdentityRegistry')
+UpsideosEvmRwaArtifacts.abi('v5', 'TransferRules')
+UpsideosEvmRwaArtifacts.abi('v5.1', 'IdentityRegistry')
 ```
 
 The token forwards unknown selectors into its extensions. Use the merged
 call surface when you talk to the token address:
 
 ```ruby
-EvmRwaArtifacts.merged_abi('v5', 'RestrictedLockupToken')
+UpsideosEvmRwaArtifacts.merged_abi('v5', 'RestrictedLockupToken')
 ```
 
 ## Verify a deployment
@@ -43,8 +43,8 @@ explorer accepts. Most explorer clients want a file, so there is a path
 reader too:
 
 ```ruby
-EvmRwaArtifacts.verification_source_codes('v5')
-EvmRwaArtifacts.verification_source_codes_path('v5')
+UpsideosEvmRwaArtifacts.verification_source_codes('v5')
+UpsideosEvmRwaArtifacts.verification_source_codes_path('v5')
 ```
 
 ## Provenance
@@ -53,9 +53,9 @@ The manifest records the audited source commit, the compiler, and a
 SHA-256 digest for every file in the release:
 
 ```ruby
-EvmRwaArtifacts.commit('v5')             # => "45b32ea..."
-EvmRwaArtifacts.compiler_version('v5')   # => "0.8.28+commit.7893614a"
-EvmRwaArtifacts.manifest('v5')
+UpsideosEvmRwaArtifacts.commit('v5')             # => "45b32ea..."
+UpsideosEvmRwaArtifacts.compiler_version('v5')   # => "0.8.28+commit.7893614a"
+UpsideosEvmRwaArtifacts.manifest('v5')
 ```
 
 To confirm that a file is the one the manifest describes:
@@ -63,7 +63,7 @@ To confirm that a file is the one the manifest describes:
 ```ruby
 require 'digest'
 
-path = EvmRwaArtifacts.abi_path('v5', 'TransferRules')
+path = UpsideosEvmRwaArtifacts.abi_path('v5', 'TransferRules')
 Digest::SHA256.hexdigest(path.binread)
 ```
 

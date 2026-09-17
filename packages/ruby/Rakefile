@@ -28,7 +28,7 @@ task test: %i[prepare check_data]
 
 desc 'Build the gem'
 task build: %i[prepare check_data] do
-  sh 'gem build evm_rwa_artifacts.gemspec'
+  sh 'gem build upsideos_evm_rwa_artifacts.gemspec'
 end
 
 task default: :test
