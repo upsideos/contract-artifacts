@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  cli:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: packages/cli
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: npm ci
+      - run: npm run format:ci
+      - run: npm run lint:ci
+      - run: npm test
+      - run: npm run build
+
+  audit-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install CLI
+        working-directory: packages/cli
+        run: npm ci
+      - name: Audit packed releases
+        working-directory: packages/cli
+        run: npx tsx src/cli.ts audit --config-root ../..

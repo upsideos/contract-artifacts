@@ -1,0 +1,7 @@
+*.js
+!jest.config.js
+!eslint.config.cjs
+*.d.ts
+node_modules
+coverage
+dist

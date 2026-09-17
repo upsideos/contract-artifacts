@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "defaultRelease": "evm/comakery_security_token_v5/2026-09-17-quantstamp",
+  "releases": {
+    "evm/comakery_security_token_v5/2026-09-17-quantstamp": {
+      "chainFamily": "evm",
+      "tokenType": "comakery_security_token_v5",
+      "releaseDir": "releases/v5",
+      "source": {
+        "commit": "45b32eaeea1d96f1f64ef0d74796a5a80ec154ce"
+      },
+      "audit": {
+        "status": "audited",
+        "auditor": "Quantstamp",
+        "completedAt": "2026-05-14"
+      },
+      "artifacts": [
+        "AccessControl",
+        "ERC2771CustomForwarder",
+        "IdentityRegistry",
+        "InterestPayment",
+        "PurchaseContract",
+        "RestrictedLockupToken",
+        "RestrictedLockupTokenExtension",
+        "RestrictedLockupTokenManagementExtension",
+        "RestrictedSwap",
+        "SnapshotPeriods",
+        "TransferRules"
+      ],
+      "callSurfaces": [
+        {
+          "name": "RestrictedLockupToken",
+          "mergedFrom": [
+            "RestrictedLockupToken",
+            "RestrictedLockupTokenExtension",
+            "RestrictedLockupTokenManagementExtension"
+          ]
+        }
+      ]
+    },
+    "evm/comakery_security_token_v5_1/unreleased": {
+      "chainFamily": "evm",
+      "tokenType": "comakery_security_token_v5_1",
+      "releaseDir": "releases/v5.1",
+      "source": {
+        "commit": "921ed469fd1015926dbed73067c93d032adeadc5"
+      },
+      "audit": {
+        "status": "unaudited"
+      },
+      "artifacts": [
+        "AccessControl",
+        "ERC2771CustomForwarder",
+        "IdentityRegistry",
+        "InterestPayment",
+        "PurchaseContract",
+        "RestrictedLockupToken",
+        "RestrictedLockupTokenExtension",
+        "RestrictedLockupTokenManagementExtension",
+        "RestrictedLockupTokenStandardsExtension",
+        "RestrictedSwap",
+        "SnapshotPeriods",
+        "TransferRules"
+      ],
+      "callSurfaces": [
+        {
+          "name": "RestrictedLockupToken",
+          "mergedFrom": [
+            "RestrictedLockupToken",
+            "RestrictedLockupTokenExtension",
+            "RestrictedLockupTokenManagementExtension",
+            "RestrictedLockupTokenStandardsExtension"
+          ]
+        }
+      ]
+    },
+    "evm/recallable_payment/v1.0.0": {
+      "chainFamily": "evm",
+      "tokenType": "recallable_payment",
+      "releaseDir": "releases/recallable-payment",
+      "source": {
+        "commit": "fcecf79c6941c211a83dfa996e0746c4d4f8f870"
+      },
+      "audit": {
+        "status": "audited",
+        "completedAt": "2026-07-29"
+      },
+      "artifacts": ["AccessControl", "RecallablePayment"],
+      "callSurfaces": []
+    }
+  }
+}

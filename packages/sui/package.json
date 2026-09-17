@@ -1,0 +1,7 @@
+{
+  "name": "@upsideos/sui-rwa-artifacts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder for Sui Move artifacts. The CLI adapter is not implemented yet.",
+  "license": "MIT"
+}

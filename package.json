@@ -1,0 +1,61 @@
+{
+  "name": "@upsideos/evm-rwa-artifacts",
+  "version": "0.1.0",
+  "description": "Audited EVM Security Token bytecode, ABIs, and verification sources",
+  "keywords": [
+    "ethereum",
+    "evm",
+    "security-token",
+    "erc1404",
+    "abi",
+    "bytecode",
+    "contract-verification"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upsideos/contract-artifacts.git"
+  },
+  "files": [
+    "releases",
+    "contract-artifacts.config.json"
+  ],
+  "types": "./releases/v5/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./releases/v5/index.d.ts",
+      "default": "./releases/v5/index.js"
+    },
+    "./v5": {
+      "types": "./releases/v5/index.d.ts",
+      "default": "./releases/v5/index.js"
+    },
+    "./v5/manifest.json": "./releases/v5/manifest.json",
+    "./v5/artifacts/*.json": "./releases/v5/artifacts/*.json",
+    "./v5/abis/*.json": "./releases/v5/abi/*.json",
+    "./v5/verification-source-codes.json": "./releases/v5/verification-source-codes.json",
+    "./v5.1": {
+      "types": "./releases/v5.1/index.d.ts",
+      "default": "./releases/v5.1/index.js"
+    },
+    "./v5.1/manifest.json": "./releases/v5.1/manifest.json",
+    "./v5.1/artifacts/*.json": "./releases/v5.1/artifacts/*.json",
+    "./v5.1/abis/*.json": "./releases/v5.1/abi/*.json",
+    "./v5.1/verification-source-codes.json": "./releases/v5.1/verification-source-codes.json",
+    "./recallable-payment": {
+      "types": "./releases/recallable-payment/index.d.ts",
+      "default": "./releases/recallable-payment/index.js"
+    },
+    "./recallable-payment/manifest.json": "./releases/recallable-payment/manifest.json",
+    "./recallable-payment/artifacts/*.json": "./releases/recallable-payment/artifacts/*.json",
+    "./recallable-payment/verification-source-codes.json": "./releases/recallable-payment/verification-source-codes.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "audit": "npm run --prefix packages/cli cli -- audit --config-root ../..",
+    "test": "npm test --prefix packages/cli"
+  }
+}

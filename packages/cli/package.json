@@ -1,0 +1,48 @@
+{
+  "name": "@upsideos/contract-artifacts-cli",
+  "version": "0.1.0",
+  "description": "Build, verify, pack, and audit audited contract artifact releases",
+  "license": "MIT",
+  "bin": {
+    "contract-artifacts": "dist/src/cli.js"
+  },
+  "main": "dist/src/cli.js",
+  "types": "dist/src/cli.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upsideos/contract-artifacts.git",
+    "directory": "packages/cli"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --coverage",
+    "lint": "eslint --fix",
+    "lint:ci": "eslint --max-warnings=0",
+    "format": "prettier --write .",
+    "format:ci": "prettier --check .",
+    "cli": "tsx src/cli.ts"
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.7.9",
+    "eslint-config-love": "^83.0.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-n": "^17.10.3",
+    "eslint-plugin-promise": "^7.1.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.7.4",
+    "solc": "0.8.28",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.7.0",
+    "typescript": "~5.6.3"
+  }
+}

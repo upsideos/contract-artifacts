@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+.DS_Store
+packages/cli/*.js
+!packages/cli/jest.config.js
+!packages/cli/eslint.config.cjs

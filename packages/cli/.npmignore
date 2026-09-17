@@ -1,0 +1,9 @@
+src
+test
+scripts
+coverage
+*.ts
+!*.d.ts
+jest.config.js
+eslint.config.cjs
+tsconfig.json

@@ -1,0 +1,7 @@
+{
+  "name": "@upsideos/solana-rwa-artifacts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Placeholder for Solana program artifacts. The CLI adapter is not implemented yet.",
+  "license": "MIT"
+}
