@@ -1,0 +1,65 @@
+{
+  "name": "@upsideos/evm-explorer-verify",
+  "version": "0.1.0",
+  "description": "Submit an Etherscan-compatible source verification for a deployed contract",
+  "keywords": [
+    "ethereum",
+    "evm",
+    "etherscan",
+    "blockscout",
+    "contract-verification",
+    "standard-json"
+  ],
+  "license": "MIT",
+  "bin": {
+    "evm-verify-explorer": "dist/src/cli.js"
+  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upsideos/contract-artifacts.git",
+    "directory": "packages/explorer-verify"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepare": "tsc",
+    "test": "jest --coverage",
+    "lint": "eslint --fix",
+    "lint:ci": "eslint --max-warnings=0",
+    "format": "prettier --write .",
+    "format:ci": "prettier --check ."
+  },
+  "peerDependencies": {
+    "@upsideos/evm-rwa-artifacts": "*",
+    "ethers": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@upsideos/evm-rwa-artifacts": {
+      "optional": true
+    },
+    "ethers": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "22.7.9",
+    "eslint-config-love": "^83.0.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-n": "^17.10.3",
+    "eslint-plugin-promise": "^7.1.0",
+    "ethers": "^6.13.4",
+    "jest": "^29.7.0",
+    "prettier": "^3.7.4",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.7.0",
+    "typescript": "~5.6.3"
+  }
+}

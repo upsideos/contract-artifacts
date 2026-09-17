@@ -6,6 +6,7 @@ Bytecode, ABIs and verification sources for audited Upside contract releases.
 | --- | --- |
 | [`@upsideos/evm-rwa-artifacts`](https://www.npmjs.com/package/@upsideos/evm-rwa-artifacts) | EVM Security Token v5, v5.1 and Recallable Payment |
 | [`@upsideos/contract-artifacts-cli`](./packages/cli) | Verify a release and check a deployed contract |
+| [`@upsideos/evm-explorer-verify`](./packages/explorer-verify) | Submit a deployment for source verification on a block explorer |
 
 Every release directory in [`releases/`](./releases) is committed here, so the
 published bytes are reviewable in git as well as in the npm tarball.
@@ -115,12 +116,25 @@ The bundle inlines every source, so this needs no git checkout and no Hardhat.
 `manifest.json` records the audit status, the auditor and the source commit for
 each release.
 
+## Verify a deployment on a block explorer
+
+Explorer verification is bound to a deployed address, so it happens after
+deployment rather than at publish time.
+[`@upsideos/evm-explorer-verify`](./packages/explorer-verify) submits the
+published bundle for you:
+
+```bash
+npx evm-verify-explorer --release v5 --contract AccessControl \
+  --address 0x... --chain-id 84532 --api-key "$EXPLORER_API_KEY"
+```
+
 ## Releases
 
 Pushing a tag publishes to npm through OIDC trusted publishing:
 
 - `evm@x.y.z` publishes `@upsideos/evm-rwa-artifacts`
 - `cli@x.y.z` publishes `@upsideos/contract-artifacts-cli`
+- `explorer@x.y.z` publishes `@upsideos/evm-explorer-verify`
 
 ## Solana and Sui
 

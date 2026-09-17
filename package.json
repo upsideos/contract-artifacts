@@ -51,6 +51,7 @@
     },
     "./recallable-payment/manifest.json": "./releases/recallable-payment/manifest.json",
     "./recallable-payment/artifacts/*.json": "./releases/recallable-payment/artifacts/*.json",
+    "./recallable-payment/abis/*.json": "./releases/recallable-payment/abi/*.json",
     "./recallable-payment/verification-source-codes.json": "./releases/recallable-payment/verification-source-codes.json",
     "./package.json": "./package.json"
   },
