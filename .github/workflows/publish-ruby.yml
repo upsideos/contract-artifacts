@@ -38,9 +38,8 @@ jobs:
         with:
           ruby-version: '3.4'
 
-      - name: Copy release data into the gem
-        run: rake prepare
-
+      # rake copies the ABIs and verification sources out of releases/
+      # before it tests or builds.
       - name: Test
         run: rake test
 
@@ -64,7 +63,7 @@ jobs:
           echo "Publishing evm_rwa_artifacts $GEM_VERSION"
 
       - name: Build
-        run: gem build evm_rwa_artifacts.gemspec
+        run: rake build
 
       # Trusted publishing exchanges the GitHub OIDC token for a short-lived
       # RubyGems key, so the workflow holds no long-lived credentials.
