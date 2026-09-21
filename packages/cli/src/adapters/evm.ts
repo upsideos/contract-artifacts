@@ -58,6 +58,30 @@ export function setSolcForTests(solc: SolcLike | undefined): void {
   cachedSolc = solc
 }
 
+/**
+ * Only the compiler the release was built with reproduces its bytecode.
+ * Another version compiles the same sources into a different metadata
+ * hash, which reads as a bytecode mismatch and sends the reader looking
+ * for a problem in the sources.
+ */
+export function assertSolcVersion(
+  solc: SolcLike,
+  expected: string | undefined,
+): void {
+  if (expected === undefined || solc.version === undefined) {
+    return
+  }
+  // solc reports '0.8.28+commit.7893614a.Emscripten.clang' for the
+  // '0.8.28+commit.7893614a' a release names.
+  const loaded = solc.version()
+  if (!loaded.startsWith(expected)) {
+    throw new Error(
+      `This release was built with solc ${expected}, and the loaded ` +
+        `compiler is ${loaded}. Install the compiler the release names.`,
+    )
+  }
+}
+
 function compiledIndex(
   output: SolcOutput,
 ): Map<string, { source: string; contract: SolcContract }> {
@@ -120,6 +144,7 @@ export class EvmAdapter implements ChainFamilyAdapter {
 
   async reproduce(input: ReproduceInput): Promise<ReproduceArtifactResult[]> {
     const solc = await loadSolc()
+    assertSolcVersion(solc, input.compilerLongVersion)
     const raw = solc.compile(JSON.stringify(input.standardJson))
     const output = JSON.parse(raw) as SolcOutput
     const errors = (output.errors ?? []).filter(e => e.severity === 'error')

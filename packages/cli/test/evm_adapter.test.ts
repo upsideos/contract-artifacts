@@ -106,6 +106,40 @@ describe('EvmAdapter.reproduce', () => {
     })
     expect(results[0].reproduced).toBe(true)
   })
+
+  it('refuses a compiler other than the one the release names', async () => {
+    setSolcForTests({
+      compile: () => JSON.stringify({ contracts: {} }),
+      version: () => '0.8.29+commit.ab55807c.Emscripten.clang',
+    })
+    await expect(
+      evmAdapter.reproduce({
+        standardJson: { language: 'Solidity', sources: {}, settings: {} },
+        compilerLongVersion: '0.8.28+commit.7893614a',
+        artifacts: [artifact],
+      }),
+    ).rejects.toThrow(/built with solc 0\.8\.28\+commit\.7893614a/)
+  })
+
+  it('accepts the build suffix solc appends to its version', async () => {
+    setSolcForTests({
+      compile: () =>
+        JSON.stringify({
+          contracts: {
+            'contracts/AccessControl.sol': {
+              AccessControl: { evm: { bytecode: { object: '1122' } } },
+            },
+          },
+        }),
+      version: () => '0.8.28+commit.7893614a.Emscripten.clang',
+    })
+    const results = await evmAdapter.reproduce({
+      standardJson: { language: 'Solidity', sources: {}, settings: {} },
+      compilerLongVersion: '0.8.28+commit.7893614a',
+      artifacts: [artifact],
+    })
+    expect(results[0].reproduced).toBe(true)
+  })
 })
 
 describe('EvmAdapter.verifyDeployed', () => {

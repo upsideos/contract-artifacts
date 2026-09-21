@@ -1,0 +1,74 @@
+name: Verify releases
+
+# Nothing in a packed release is taken on trust before it merges. Each
+# release is compiled again from its own published sources and the result
+# is compared with the bytecode it ships.
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recompile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      # solc holds a whole compilation in memory, and the largest release
+      # carries close to a megabyte of sources.
+      NODE_OPTIONS: '--max-old-space-size=8192'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # solc is pinned to one patch version here. Only the compiler a
+      # release was built with reproduces its bytecode.
+      - name: Install the CLI
+        working-directory: packages/cli
+        run: npm ci
+
+      # Reads the standard-json input of each release, compiles it with the
+      # solc version that release names, and compares every artifact with
+      # the bytecode the release ships.
+      #
+      # This cannot compare the inlined sources against the contracts
+      # repository, because that repository is private and no release names
+      # it. The publish pipeline makes that comparison at the pinned commit
+      # before a release ever reaches this repository, so --skip-proof-a
+      # here accepts a check that already happened elsewhere.
+      - name: Recompile every release and compare the bytecode
+        working-directory: packages/cli
+        run: |
+          # The config is the one catalog of releases, so the list comes
+          # from there instead of a second copy in this file.
+          jq -r '.releases | keys[]' ../../contract-artifacts.config.json \
+            > "$RUNNER_TEMP/releases.txt"
+          if [ ! -s "$RUNNER_TEMP/releases.txt" ]; then
+            echo "::error::contract-artifacts.config.json lists no releases"
+            exit 1
+          fi
+
+          failed=0
+          while read -r release; do
+            echo "::group::$release"
+            if npx tsx src/cli.ts verify \
+              --release "$release" \
+              --config-root ../.. \
+              --skip-proof-a
+            then
+              echo "$release reproduced its bytecode"
+            else
+              # Keep going, so one run names every release that failed.
+              echo "::error::$release did not reproduce its bytecode"
+              failed=1
+            fi
+            echo "::endgroup::"
+          done < "$RUNNER_TEMP/releases.txt"
+          exit "$failed"
