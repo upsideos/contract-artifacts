@@ -297,7 +297,13 @@ describe('build helpers', () => {
       JSON.stringify({ buildInfo: '../../build-info/aaa.json' }),
     )
     writeFileSync(
-      join(dir, 'contracts', 'mocks', 'ConsoleMock.sol', 'ConsoleMock.dbg.json'),
+      join(
+        dir,
+        'contracts',
+        'mocks',
+        'ConsoleMock.sol',
+        'ConsoleMock.dbg.json',
+      ),
       JSON.stringify({ buildInfo: '../../../build-info/aaa.json' }),
     )
 
