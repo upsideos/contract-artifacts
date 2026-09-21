@@ -12,10 +12,10 @@ export const PurchaseContract: ContractArtifact
 export const RestrictedLockupToken: ContractArtifact
 export const RestrictedLockupTokenExtension: ContractArtifact
 export const RestrictedLockupTokenManagementExtension: ContractArtifact
+export const RestrictedLockupTokenStandardsExtension: ContractArtifact
 export const RestrictedSwap: ContractArtifact
 export const SnapshotPeriods: ContractArtifact
 export const TransferRules: ContractArtifact
-export const RestrictedLockupTokenStandardsExtension: ContractArtifact
 export const artifacts: Record<string, ContractArtifact>
 declare const _default: Record<string, ContractArtifact>
 export default _default

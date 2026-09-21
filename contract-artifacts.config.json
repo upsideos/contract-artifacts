@@ -45,7 +45,7 @@
       "chainFamily": "evm",
       "tokenType": "comakery_security_token_v5_1",
       "source": {
-        "commit": "921ed469fd1015926dbed73067c93d032adeadc5"
+        "commit": "6aba12cb064d4c5390a101fa9005891e05c07c8f"
       },
       "audit": {
         "status": "unaudited"
@@ -91,7 +91,10 @@
         "reportSha256": "d29fc18607cfb426219159d8db42dd547b2ad4cf72514f0d9025a2a098243b16",
         "completedAt": "2026-07-10"
       },
-      "artifacts": ["AccessControl", "RecallablePayment"],
+      "artifacts": [
+        "AccessControl",
+        "RecallablePayment"
+      ],
       "callSurfaces": [],
       "releaseDir": "releases/recallable-payment"
     }

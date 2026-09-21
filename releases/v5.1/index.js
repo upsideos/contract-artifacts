@@ -8,10 +8,10 @@ const artifacts = {
   RestrictedLockupToken: require('./artifacts/RestrictedLockupToken.json'),
   RestrictedLockupTokenExtension: require('./artifacts/RestrictedLockupTokenExtension.json'),
   RestrictedLockupTokenManagementExtension: require('./artifacts/RestrictedLockupTokenManagementExtension.json'),
+  RestrictedLockupTokenStandardsExtension: require('./artifacts/RestrictedLockupTokenStandardsExtension.json'),
   RestrictedSwap: require('./artifacts/RestrictedSwap.json'),
   SnapshotPeriods: require('./artifacts/SnapshotPeriods.json'),
   TransferRules: require('./artifacts/TransferRules.json'),
-  RestrictedLockupTokenStandardsExtension: require('./artifacts/RestrictedLockupTokenStandardsExtension.json'),
 }
 module.exports = Object.assign({ artifacts: artifacts }, artifacts)
 module.exports.default = artifacts
