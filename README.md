@@ -121,6 +121,10 @@ npx @upsideos/contract-artifacts-cli verify-onchain \
 The bundle inlines every source, so this needs no git checkout and no Hardhat.
 `npx @upsideos/contract-artifacts-cli verify --release <id>` runs it for you.
 
+This is the same check the `Verify releases` workflow runs on every pull
+request, across every release in the catalog. A release that no longer
+recompiles to its published bytecode cannot merge.
+
 ## What you can verify
 
 - The published sources recompile to the published bytecode.
