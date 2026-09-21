@@ -271,6 +271,49 @@ describe('build helpers', () => {
     expect(bundle.output).toBeUndefined()
     rmSync(dir, { recursive: true, force: true })
   })
+
+  it('keeps a mock out of the bundle even when it has its own dbg.json', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'hh-'))
+    mkdirSync(join(dir, 'build-info'), { recursive: true })
+    mkdirSync(join(dir, 'contracts', 'AccessControl.sol'), { recursive: true })
+    mkdirSync(join(dir, 'contracts', 'mocks', 'ConsoleMock.sol'), {
+      recursive: true,
+    })
+    writeFileSync(
+      join(dir, 'build-info', 'aaa.json'),
+      JSON.stringify({
+        solcLongVersion: '0.8.28+commit.7893614a',
+        input: {
+          sources: {
+            'contracts/AccessControl.sol': { content: 'correct' },
+            'contracts/mocks/ConsoleMock.sol': { content: 'mock' },
+            'hardhat/console.sol': { content: 'console' },
+          },
+        },
+      }),
+    )
+    writeFileSync(
+      join(dir, 'contracts', 'AccessControl.sol', 'AccessControl.dbg.json'),
+      JSON.stringify({ buildInfo: '../../build-info/aaa.json' }),
+    )
+    writeFileSync(
+      join(dir, 'contracts', 'mocks', 'ConsoleMock.sol', 'ConsoleMock.dbg.json'),
+      JSON.stringify({ buildInfo: '../../../build-info/aaa.json' }),
+    )
+
+    const sources = (
+      selectVerificationBundle(dir) as {
+        input: { sources: Record<string, unknown> }
+      }
+    ).input.sources
+    // The mock imports hardhat/console.sol, which no release ships. Keeping
+    // the mock would leave that import unresolvable and solc would refuse
+    // the whole input.
+    expect(sources['contracts/mocks/ConsoleMock.sol']).toBeUndefined()
+    expect(sources['hardhat/console.sol']).toBeUndefined()
+    expect(sources['contracts/AccessControl.sol']).toBeDefined()
+    rmSync(dir, { recursive: true, force: true })
+  })
 })
 
 describe('multichain stubs', () => {

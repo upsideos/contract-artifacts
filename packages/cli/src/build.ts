@@ -66,6 +66,10 @@ function walkFiles(dir: string, acc: string[] = []): string[] {
   return acc
 }
 
+export function isFilteredSource(path: string): boolean {
+  return FILTERED_SOURCE_PREFIXES.some(prefix => path.startsWith(prefix))
+}
+
 function removeKeysWithPrefixes(
   obj: Record<string, unknown>,
   prefixes: string[],
@@ -133,8 +137,16 @@ export function selectVerificationBundle(
       if (!allBuildInfos.has(dedicatedId)) {
         continue
       }
-      dbgCounts.set(dedicatedId, (dbgCounts.get(dedicatedId) ?? 0) + 1)
       const sourcePath = relative(artifactsDir, dirname(dbgFile))
+      // A mock or a test compiles against helpers that a release does not
+      // ship, such as hardhat/console.sol. Carrying one into the bundle
+      // leaves an import that resolves to nothing, and solc refuses the
+      // whole input. Such a source also must not decide which build-info
+      // the bundle is taken from.
+      if (isFilteredSource(sourcePath)) {
+        continue
+      }
+      dbgCounts.set(dedicatedId, (dbgCounts.get(dedicatedId) ?? 0) + 1)
       contractSourceFromDbg.set(sourcePath, dedicatedId)
     }
   }
