@@ -1,4 +1,10 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import {
@@ -204,8 +210,18 @@ describe('generateAbis and audit', () => {
       cwd: repo,
       encoding: 'utf8',
     }).trim()
+    // The pipeline packs the commit the config pins, so the fixture has to
+    // agree with itself or the audit gate reports the drift it is there to
+    // find.
+    const configPath = join(dir, 'contract-artifacts.config.json')
+    const config = JSON.parse(readFileSync(configPath, 'utf8')) as {
+      releases: Record<string, { source: { commit: string } }>
+    }
+    config.releases['evm/test/1'].source.commit = commit
+    writeFileSync(configPath, JSON.stringify(config))
+
     const report = await verifyLoadedRelease({
-      entry,
+      entry: getRelease('evm/test/1', dir),
       artifacts,
       bundle,
       commit,

@@ -234,6 +234,7 @@ export async function verifyLoadedRelease(options: {
       schemaVersion: '1.0',
       releaseId: options.entry.releaseId,
       chainFamily: options.entry.chainFamily,
+      releasedAt: options.entry.releasedAt,
       audit: { ...options.entry.audit },
       source: {
         repository: options.entry.source.repository,

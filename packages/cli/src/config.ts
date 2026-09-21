@@ -23,6 +23,8 @@ export const releaseConfigSchema = z.object({
   vendorDir: z.string().min(1).optional(),
   packageName: z.string().min(1).optional(),
   packageRelease: z.string().min(1).optional(),
+  // The day this release went out, which is not the day the audit ended.
+  releasedAt: z.string().optional(),
   source: z.object({
     repository: z.string().url().optional(),
     commit: z.string().regex(/^[0-9a-f]{40}$/),
@@ -30,6 +32,18 @@ export const releaseConfigSchema = z.object({
   audit: z.object({
     status: z.enum(['audited', 'unaudited']),
     auditor: z.string().optional(),
+    // The commit the report reviewed. Findings get fixed after a review,
+    // so this sits behind source.commit rather than on it.
+    commit: z
+      .string()
+      .regex(/^[0-9a-f]{40}$/)
+      .optional(),
+    // The report that backs the claim, so a reader can check the claim
+    // against the file instead of taking the word of this config.
+    reportSha256: z
+      .string()
+      .regex(/^[0-9a-f]{64}$/)
+      .optional(),
     completedAt: z.string().optional(),
   }),
   artifacts: z.array(z.string().min(1)).min(1),

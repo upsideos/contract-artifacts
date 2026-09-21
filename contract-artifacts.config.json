@@ -5,14 +5,16 @@
     "evm/comakery_security_token_v5/2026-09-17-quantstamp": {
       "chainFamily": "evm",
       "tokenType": "comakery_security_token_v5",
-      "releaseDir": "releases/v5",
+      "releasedAt": "2026-05-14",
       "source": {
         "commit": "45b32eaeea1d96f1f64ef0d74796a5a80ec154ce"
       },
       "audit": {
         "status": "audited",
         "auditor": "Quantstamp",
-        "completedAt": "2026-05-14"
+        "commit": "b0c49b53272ae646f9f394a0edb29cc0b26432d8",
+        "reportSha256": "f6bbc3a2a3d53c9ccae59573d926ab00e35f5f82dbe6707fbe495cb960942de5",
+        "completedAt": "2025-09-25"
       },
       "artifacts": [
         "AccessControl",
@@ -36,12 +38,12 @@
             "RestrictedLockupTokenManagementExtension"
           ]
         }
-      ]
+      ],
+      "releaseDir": "releases/v5"
     },
     "evm/comakery_security_token_v5_1/unreleased": {
       "chainFamily": "evm",
       "tokenType": "comakery_security_token_v5_1",
-      "releaseDir": "releases/v5.1",
       "source": {
         "commit": "921ed469fd1015926dbed73067c93d032adeadc5"
       },
@@ -72,21 +74,26 @@
             "RestrictedLockupTokenStandardsExtension"
           ]
         }
-      ]
+      ],
+      "releaseDir": "releases/v5.1"
     },
     "evm/recallable_payment/v1.0.0": {
       "chainFamily": "evm",
       "tokenType": "recallable_payment",
-      "releaseDir": "releases/recallable-payment",
+      "releasedAt": "2026-07-29",
       "source": {
         "commit": "fcecf79c6941c211a83dfa996e0746c4d4f8f870"
       },
       "audit": {
         "status": "audited",
-        "completedAt": "2026-07-29"
+        "auditor": "Quantstamp",
+        "commit": "7cec846cdfd680f8416e22c00a267313a7c4970a",
+        "reportSha256": "d29fc18607cfb426219159d8db42dd547b2ad4cf72514f0d9025a2a098243b16",
+        "completedAt": "2026-07-10"
       },
       "artifacts": ["AccessControl", "RecallablePayment"],
-      "callSurfaces": []
+      "callSurfaces": [],
+      "releaseDir": "releases/recallable-payment"
     }
   }
 }

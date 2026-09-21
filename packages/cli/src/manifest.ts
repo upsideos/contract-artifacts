@@ -106,9 +106,14 @@ export const manifestSchema = z.object({
   schemaVersion: z.literal(SCHEMA_VERSION),
   releaseId: z.string().min(1),
   chainFamily: z.enum(['evm', 'solana', 'sui']),
+  releasedAt: z.string().optional(),
   audit: z.object({
     status: z.enum(['audited', 'unaudited']),
     auditor: z.string().optional(),
+    commit: z
+      .string()
+      .regex(/^[0-9a-f]{40}$/)
+      .optional(),
     reportSha256: z
       .string()
       .regex(/^[0-9a-f]{64}$/)
