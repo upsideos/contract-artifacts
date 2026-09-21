@@ -51,6 +51,30 @@ function auditPackedRelease(entry: ReleaseCatalogEntry): AuditFinding[] {
   const manifest = parseManifest(loadJson(manifestPath))
   const findings: AuditFinding[] = []
 
+  // The config is the one catalog of pins and audit claims. A release
+  // packed before a claim changed keeps serving the old one, and the
+  // hashes below all still match, so nothing else here would notice.
+  const pinned = manifest.source.commit === entry.source.commit
+  findings.push({
+    path: manifestPath,
+    ok: pinned,
+    message: pinned
+      ? 'manifest holds the pinned commit'
+      : `manifest holds ${manifest.source.commit} but the config pins ` +
+        `${entry.source.commit}, so this release needs packing again`,
+  })
+
+  const claimed =
+    sha256Canonical(manifest.audit) === sha256Canonical(entry.audit) &&
+    manifest.releasedAt === entry.releasedAt
+  findings.push({
+    path: manifestPath,
+    ok: claimed,
+    message: claimed
+      ? 'manifest holds the audit claim of the config'
+      : 'audit claim differs from the config',
+  })
+
   const bundlePath = join(
     releaseDir,
     manifest.build.kind === 'solc-standard-json'

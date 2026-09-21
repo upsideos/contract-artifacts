@@ -31,7 +31,10 @@ npx contract-artifacts verify --release <id>
 ```
 
 Point `--contracts-repo` at a checkout to also compare each inlined source
-against the commit recorded in the manifest.
+against the commit recorded in the manifest. Without a checkout that
+comparison cannot run: `verify` then reports `Proof A: SKIPPED` and exits
+non-zero, because a proof that did not run is not a proof that passed. Add
+`--skip-proof-a` to accept a release on the recompile alone.
 
 ## Build and pack a release
 

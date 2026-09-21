@@ -59,7 +59,7 @@ function flagString(
 function usage(): string {
   return `Usage:
   contract-artifacts build --release <id> --artifacts-dir <path> --out-dir <path>
-  contract-artifacts verify --release <id> [--commit <sha>] [--skip-compile] [--allow-unreproduced <name>]
+  contract-artifacts verify --release <id> [--commit <sha>] [--contracts-repo <path>] [--skip-compile] [--skip-proof-a] [--allow-unreproduced <name>]
   contract-artifacts pack --release <id> --out-dir <path> [--skip-compile]
   contract-artifacts audit [--release <id>]
   contract-artifacts generate-abis --release <id> [--write]
@@ -76,6 +76,7 @@ function configRootFrom(
 function printVerify(report: {
   proofA: {
     ok: boolean
+    skipped: boolean
     sources: Array<{ path: string; match: boolean; message: string }>
   }
   proofB: {
@@ -83,9 +84,16 @@ function printVerify(report: {
     artifacts: Array<{ name: string; reproduced: boolean; message?: string }>
   }
 }): void {
-  console.log(
-    `Proof A: ${report.proofA.ok ? 'PASS' : 'FAIL'} (${report.proofA.sources.filter(s => s.match).length}/${report.proofA.sources.length} sources)`,
-  )
+  if (report.proofA.skipped) {
+    console.log(
+      'Proof A: SKIPPED (no contracts checkout to compare the sources ' +
+        'against, pass --contracts-repo)',
+    )
+  } else {
+    console.log(
+      `Proof A: ${report.proofA.ok ? 'PASS' : 'FAIL'} (${report.proofA.sources.filter(s => s.match).length}/${report.proofA.sources.length} sources)`,
+    )
+  }
   for (const source of report.proofA.sources.filter(s => !s.match)) {
     console.log(`  ${source.path}: ${source.message}`)
   }
@@ -98,6 +106,19 @@ function printVerify(report: {
     }
   }
 }
+
+// A proof that did not run is not a proof that passed. Only a caller who
+// asked for --skip-proof-a gets a release without one.
+function proofAAccepted(
+  proofA: { ok: boolean; skipped: boolean },
+  flags: Record<string, string | boolean | string[]>,
+): boolean {
+  return proofA.skipped ? flags['skip-proof-a'] === true : proofA.ok
+}
+
+const PROOF_A_MISSING =
+  'The sources were not compared against the pinned commit. Pass ' +
+  '--contracts-repo <path>, or --skip-proof-a to accept the release without it.'
 
 export async function run(argv: string[]): Promise<number> {
   const { command, flags } = parseArgs(argv)
@@ -125,7 +146,10 @@ export async function run(argv: string[]): Promise<number> {
         : undefined,
     })
     printVerify(report)
-    return report.proofA.ok && report.proofB.ok ? 0 : 1
+    if (report.proofA.skipped && flags['skip-proof-a'] !== true) {
+      console.error(PROOF_A_MISSING)
+    }
+    return proofAAccepted(report.proofA, flags) && report.proofB.ok ? 0 : 1
   }
 
   if (command === 'pack') {
@@ -147,9 +171,13 @@ export async function run(argv: string[]): Promise<number> {
         ? flags['allow-unreproduced']
         : undefined,
     })
-    if (!report.proofA.ok || !report.proofB.ok) {
+    if (!proofAAccepted(report.proofA, flags) || !report.proofB.ok) {
       printVerify(report)
-      console.error('Refusing to pack: proofs failed')
+      console.error(
+        report.proofA.skipped
+          ? `Refusing to pack: ${PROOF_A_MISSING}`
+          : 'Refusing to pack: proofs failed',
+      )
       return 1
     }
     const artifacts = loadReleaseArtifacts(entry)
@@ -184,6 +212,10 @@ export async function run(argv: string[]): Promise<number> {
         ? flags['allow-unreproduced']
         : undefined,
     })
+    if (result.proofASkipped && flags['skip-proof-a'] !== true) {
+      console.error(`Refusing the release: ${PROOF_A_MISSING}`)
+      return 1
+    }
     console.log(`Wrote release to ${result.outDir}`)
     return result.reproduced ? 0 : 1
   }

@@ -1,4 +1,10 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import {
@@ -150,6 +156,28 @@ describe('verifyLoadedRelease skipCompile', () => {
     rmSync(repo, { recursive: true, force: true })
     rmSync(dir, { recursive: true, force: true })
   })
+
+  it('reports proof A as skipped when it has nothing to compare against', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ver-'))
+    writePackedFixture(dir)
+
+    // The published releases name no source repository, which is what a
+    // consumer without a contracts checkout meets.
+    const entry = getRelease('evm/test/1', dir)
+    entry.source = { commit: entry.source.commit }
+    const artifacts = loadReleaseArtifacts(entry)
+    const report = await verifyLoadedRelease({
+      entry,
+      artifacts,
+      bundle: loadVerificationBundle(entry),
+      skipCompile: true,
+    })
+
+    // A proof nobody made must not read as a proof that passed.
+    expect(report.proofA.skipped).toBe(true)
+    expect(report.proofA.sources).toHaveLength(0)
+    rmSync(dir, { recursive: true, force: true })
+  })
 })
 
 describe('generateAbis and audit', () => {
@@ -182,8 +210,18 @@ describe('generateAbis and audit', () => {
       cwd: repo,
       encoding: 'utf8',
     }).trim()
+    // The pipeline packs the commit the config pins, so the fixture has to
+    // agree with itself or the audit gate reports the drift it is there to
+    // find.
+    const configPath = join(dir, 'contract-artifacts.config.json')
+    const config = JSON.parse(readFileSync(configPath, 'utf8')) as {
+      releases: Record<string, { source: { commit: string } }>
+    }
+    config.releases['evm/test/1'].source.commit = commit
+    writeFileSync(configPath, JSON.stringify(config))
+
     const report = await verifyLoadedRelease({
-      entry,
+      entry: getRelease('evm/test/1', dir),
       artifacts,
       bundle,
       commit,
