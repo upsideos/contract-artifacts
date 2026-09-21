@@ -1,6 +1,6 @@
 {
   "name": "@upsideos/evm-rwa-artifacts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Audited EVM Security Token bytecode, ABIs, and verification sources",
   "keywords": [
     "ethereum",
