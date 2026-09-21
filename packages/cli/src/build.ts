@@ -228,6 +228,7 @@ function findNamedArtifact(
 export async function buildRelease(options: BuildOptions): Promise<{
   outDir: string
   reproduced: boolean
+  proofASkipped: boolean
 }> {
   const configRoot = options.configRoot ?? findConfigRoot()
   const entry = getRelease(options.releaseId, configRoot)
@@ -270,5 +271,6 @@ export async function buildRelease(options: BuildOptions): Promise<{
   return {
     outDir: options.outDir,
     reproduced: report.proofA.ok && report.proofB.ok,
+    proofASkipped: report.proofA.skipped,
   }
 }

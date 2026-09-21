@@ -150,6 +150,28 @@ describe('verifyLoadedRelease skipCompile', () => {
     rmSync(repo, { recursive: true, force: true })
     rmSync(dir, { recursive: true, force: true })
   })
+
+  it('reports proof A as skipped when it has nothing to compare against', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'ver-'))
+    writePackedFixture(dir)
+
+    // The published releases name no source repository, which is what a
+    // consumer without a contracts checkout meets.
+    const entry = getRelease('evm/test/1', dir)
+    entry.source = { commit: entry.source.commit }
+    const artifacts = loadReleaseArtifacts(entry)
+    const report = await verifyLoadedRelease({
+      entry,
+      artifacts,
+      bundle: loadVerificationBundle(entry),
+      skipCompile: true,
+    })
+
+    // A proof nobody made must not read as a proof that passed.
+    expect(report.proofA.skipped).toBe(true)
+    expect(report.proofA.sources).toHaveLength(0)
+    rmSync(dir, { recursive: true, force: true })
+  })
 })
 
 describe('generateAbis and audit', () => {

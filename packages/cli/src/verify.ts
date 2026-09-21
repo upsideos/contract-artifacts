@@ -34,7 +34,7 @@ export interface SourceCheck {
 export interface VerifyReport {
   releaseId: string
   commit: string
-  proofA: { ok: boolean; sources: SourceCheck[] }
+  proofA: { ok: boolean; skipped: boolean; sources: SourceCheck[] }
   proofB: { ok: boolean; artifacts: ReproduceArtifactResult[] }
   manifest: Manifest
 }
@@ -186,7 +186,8 @@ export async function verifyLoadedRelease(options: {
   let cloned = false
   const haveLocalRepo = contractsRepo !== undefined && existsSync(contractsRepo)
   // Without a source repository a caller can only compare against a checkout
-  // it already has.
+  // it already has. The report says that this proof did not run, because a
+  // proof nobody made must not read as a proof that passed.
   const skipProofA =
     options.skipProofA === true || (repository === undefined && !haveLocalRepo)
   if (!skipProofA && repository !== undefined && !haveLocalRepo) {
@@ -254,7 +255,7 @@ export async function verifyLoadedRelease(options: {
     return {
       releaseId: options.entry.releaseId,
       commit,
-      proofA: { ok: proofAOk, sources: proofASources },
+      proofA: { ok: proofAOk, skipped: skipProofA, sources: proofASources },
       proofB: { ok: proofBOk, artifacts: compiled },
       manifest,
     }
