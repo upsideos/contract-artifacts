@@ -45,7 +45,7 @@
       "chainFamily": "evm",
       "tokenType": "comakery_security_token_v5_1",
       "source": {
-        "commit": "6aba12cb064d4c5390a101fa9005891e05c07c8f"
+        "commit": "921ed469fd1015926dbed73067c93d032adeadc5"
       },
       "audit": {
         "status": "unaudited"
