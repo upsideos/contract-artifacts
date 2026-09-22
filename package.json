@@ -1,6 +1,6 @@
 {
   "name": "@upsideos/evm-rwa-artifacts",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Audited EVM Security Token bytecode, ABIs, and verification sources",
   "keywords": [
     "ethereum",
@@ -53,6 +53,7 @@
     "./recallable-payment/artifacts/*.json": "./releases/recallable-payment/artifacts/*.json",
     "./recallable-payment/abis/*.json": "./releases/recallable-payment/abi/*.json",
     "./recallable-payment/verification-source-codes.json": "./releases/recallable-payment/verification-source-codes.json",
+    "./releases/*": "./releases/*",
     "./package.json": "./package.json"
   },
   "scripts": {
