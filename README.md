@@ -38,6 +38,8 @@ Available exports:
 | `/v5/manifest.json` | Release record, source commit and per-artifact hashes |
 | `/v5/artifacts/<Name>.json` | ABI, creation code, runtime code, immutable slots |
 | `/v5/abis/<Name>.json` | Per-contract ABI |
+| `/v5/abis` | The same ABIs, typed for viem |
+| `/v5/abis/merged` | The merged call surfaces, typed for viem |
 | `/v5/verification-source-codes.json` | solc standard-json input |
 | `/releases/<release>/...` | The same files, by their path in the package |
 
@@ -49,6 +51,26 @@ where the toolchain supports them.
 `manifest.json` also lists `callSurfaces`. The token forwards unknown selectors
 into its extensions, so a client that talks to the token address needs the
 merged ABI, not the token ABI alone.
+
+### Typed ABIs
+
+viem and abitype read event and function names out of the ABI type. A JSON
+import widens every `"type": "uint256"` to `string`, which no longer satisfies
+`Abi`, and the names go with it. The `/abis` exports carry the literal type, so
+the names survive:
+
+```ts
+import { restrictedLockupTokenAbi } from '@upsideos/evm-rwa-artifacts/v5.1/abis/merged'
+import { interestPaymentAbi } from '@upsideos/evm-rwa-artifacts/v5.1/abis'
+
+// "Transfer" | "AddressFrozen" | ..., not string
+type Events = ExtractAbiEventNames<typeof restrictedLockupTokenAbi>
+```
+
+The export name is the contract in camel case with an `Abi` suffix:
+`RestrictedLockupToken` becomes `restrictedLockupTokenAbi`. Each module reads
+the JSON the release already ships, so the ABI appears once in the package no
+matter how many modules name it.
 
 ## Ruby
 

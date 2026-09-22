@@ -2,14 +2,19 @@
 /**
  * contract-artifacts CLI
  *
- * build | verify | pack | audit | generate-abis | verify-onchain
+ * build | verify | pack | audit | generate-abis | typed-abis | verify-onchain
  */
 
 import { join } from 'node:path'
 import { auditAll, auditRelease } from './audit'
 import { buildRelease } from './build'
 import { defaultReleaseId, findConfigRoot, getRelease } from './config'
-import { generateAbis, writeGeneratedAbis } from './generate_abis'
+import {
+  diffGeneratedAbis,
+  generateAbis,
+  writeGeneratedAbis,
+} from './generate_abis'
+import { generateTypedAbisForRelease } from './typed_abis'
 import { loadJson } from './artifacts'
 import { parseManifest } from './manifest'
 import { writeReleaseFiles, writeReleaseIndex } from './pack'
@@ -63,6 +68,7 @@ function usage(): string {
   contract-artifacts pack --release <id> --out-dir <path> [--skip-compile]
   contract-artifacts audit [--release <id>]
   contract-artifacts generate-abis --release <id> [--write]
+  contract-artifacts typed-abis --release <id> [--write]
   contract-artifacts verify-onchain --release <id> --address <addr> --rpc <url> --contract <name> [--manifest <path> | --registry-url <url>]
 `
 }
@@ -253,6 +259,32 @@ export async function run(argv: string[]): Promise<number> {
       )
     }
     return 0
+  }
+
+  if (command === 'typed-abis') {
+    const releaseId = flagString(flags, 'release')
+    if (releaseId === undefined) {
+      console.error('--release is required')
+      return 1
+    }
+    const files = generateTypedAbisForRelease(getRelease(releaseId, configRoot))
+    if (flags.write === true) {
+      writeGeneratedAbis(files, configRoot)
+      console.log(`Wrote ${files.length} typed ABI files`)
+      return 0
+    }
+    const diffs = diffGeneratedAbis(files, configRoot).filter(
+      diff => diff.status !== 'match',
+    )
+    for (const diff of diffs) {
+      console.log(`${diff.path}: ${diff.status}`)
+    }
+    console.log(
+      diffs.length === 0
+        ? `${files.length} typed ABI files match`
+        : `${diffs.length} of ${files.length} differ. Pass --write to apply.`,
+    )
+    return diffs.length === 0 ? 0 : 1
   }
 
   if (command === 'verify-onchain') {
