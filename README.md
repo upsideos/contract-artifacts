@@ -39,6 +39,12 @@ Available exports:
 | `/v5/artifacts/<Name>.json` | ABI, creation code, runtime code, immutable slots |
 | `/v5/abis/<Name>.json` | Per-contract ABI |
 | `/v5/verification-source-codes.json` | solc standard-json input |
+| `/releases/<release>/...` | The same files, by their path in the package |
+
+The `/releases/...` paths read the same files as the named exports. They are
+there for a toolchain that resolves by file path and reads no `exports` map,
+such as TypeScript under `moduleResolution: node10`. Prefer the named exports
+where the toolchain supports them.
 
 `manifest.json` also lists `callSurfaces`. The token forwards unknown selectors
 into its extensions, so a client that talks to the token address needs the
@@ -46,10 +52,10 @@ merged ABI, not the token ABI alone.
 
 ## Ruby
 
-The [`upsideos_evm_rwa_artifacts`](./packages/ruby) gem carries the same ABIs and
-verification sources, built from the same audited commit. It ships no bytecode
-and no tooling, because a Ruby consumer reads contracts and verifies them but
-does not deploy them.
+The [`upsideos_evm_rwa_artifacts`](./packages/ruby) gem carries the same ABIs,
+creation code and verification sources, built from the same audited commit. It
+ships no tooling, because a Ruby consumer reads contracts and hands them on but
+does not compile them.
 
 ```ruby
 require 'upsideos_evm_rwa_artifacts'
