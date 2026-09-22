@@ -3,9 +3,9 @@
 
 # Copy the data the gem ships out of the release directories.
 #
-# The gem carries ABIs, manifests and verification sources. It leaves out
-# the bytecode in artifacts/, because a Ruby consumer reads contracts and
-# verifies them but does not deploy them.
+# The gem carries ABIs, artifacts, manifests and verification sources. A
+# Ruby consumer hands the creation code to a browser that deploys the set,
+# so the artifacts come along with the ABIs.
 
 require 'fileutils'
 require 'pathname'
@@ -29,17 +29,17 @@ def copy_release(release)
     FileUtils.cp(source.join(file), target.join(file))
   end
 
-  FileUtils.mkdir_p(target.join('abi'))
-  Dir[source.join('abi', '*.json')].each do |abi|
-    FileUtils.cp(abi, target.join('abi', File.basename(abi)))
-  end
+  copy_json_dir(source.join('abi'), target.join('abi'))
+  copy_json_dir(source.join('artifacts'), target.join('artifacts'))
+  copy_json_dir(source.join('abi', 'merged'), target.join('abi', 'merged'))
+end
 
-  merged = source.join('abi', 'merged')
-  return unless merged.directory?
+def copy_json_dir(source, target)
+  return unless source.directory?
 
-  FileUtils.mkdir_p(target.join('abi', 'merged'))
-  Dir[merged.join('*.json')].each do |abi|
-    FileUtils.cp(abi, target.join('abi', 'merged', File.basename(abi)))
+  FileUtils.mkdir_p(target)
+  Dir[source.join('*.json')].each do |file|
+    FileUtils.cp(file, target.join(File.basename(file)))
   end
 end
 

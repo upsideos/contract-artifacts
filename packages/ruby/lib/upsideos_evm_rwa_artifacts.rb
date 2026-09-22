@@ -5,7 +5,8 @@ require 'pathname'
 
 require_relative 'upsideos_evm_rwa_artifacts/version'
 
-# ABIs and verification sources for audited EVM contract releases.
+# ABIs, creation code and verification sources for audited EVM contract
+# releases.
 #
 # The gem carries data only. It has no dependencies and runs no code at
 # load time beyond reading the release directory.
@@ -54,6 +55,12 @@ module UpsideosEvmRwaArtifacts
       path(release, "abi/#{contract}.json")
     end
 
+    # The ABI together with the creation code, in the shape a deployment
+    # front end reads: abi, bytecode, deployedBytecode, immutableReferences.
+    def artifact_path(release, contract)
+      path(release, "artifacts/#{contract}.json")
+    end
+
     # The token forwards unknown selectors into its extensions, so a caller
     # that talks to the token address needs the merged call surface rather
     # than the token ABI alone.
@@ -75,6 +82,16 @@ module UpsideosEvmRwaArtifacts
 
     def merged_abi(release, contract)
       read_json(merged_abi_path(release, contract))
+    end
+
+    def artifact(release, contract)
+      read_json(artifact_path(release, contract))
+    end
+
+    # The creation code, as the 0x-prefixed hex a deployment transaction
+    # carries. Constructor arguments append to it.
+    def bytecode(release, contract)
+      artifact(release, contract).fetch('bytecode')
     end
 
     def verification_source_codes(release)

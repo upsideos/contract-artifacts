@@ -85,9 +85,35 @@ class UpsideosEvmRwaArtifactsTest < Minitest::Test
     assert_raises(UpsideosEvmRwaArtifacts::UnknownFile) { UpsideosEvmRwaArtifacts.abi('v5', 'NoSuchContract') }
   end
 
-  # The gem is data only. Bytecode belongs to the npm package, because a
-  # Ruby consumer reads and verifies contracts but does not deploy them.
-  def test_no_bytecode_ships
-    assert_empty Dir[UpsideosEvmRwaArtifacts::DATA_ROOT.join('**', 'artifacts', '*')]
+  def test_bytecode_is_prefixed_hex
+    bytecode = UpsideosEvmRwaArtifacts.bytecode('v5', 'AccessControl')
+
+    assert_match(/\A0x[0-9a-f]+\z/, bytecode)
+  end
+
+  def test_artifact_carries_the_same_abi_as_the_abi_file
+    artifact = UpsideosEvmRwaArtifacts.artifact('v5.1', 'RestrictedLockupToken')
+
+    assert_equal UpsideosEvmRwaArtifacts.abi('v5.1', 'RestrictedLockupToken'), artifact.fetch('abi')
+  end
+
+  # The manifest digests the creation code as raw bytes, so a truncated or
+  # re-encoded copy in the gem shows up here.
+  def test_shipped_creation_code_matches_the_manifest_digests
+    UpsideosEvmRwaArtifacts.releases.each do |release|
+      UpsideosEvmRwaArtifacts.manifest(release).fetch('artifacts').each do |entry|
+        name = entry.fetch('name')
+        creation = entry.fetch('creationCode')
+        bytes = [UpsideosEvmRwaArtifacts.bytecode(release, name).delete_prefix('0x')].pack('H*')
+
+        assert_equal creation.fetch('length'), bytes.length, "#{release} #{name} creation code length"
+        assert_equal creation.fetch('sha256'), Digest::SHA256.hexdigest(bytes),
+                     "#{release} #{name} creation code digest"
+      end
+    end
+  end
+
+  def test_unknown_contract_artifact
+    assert_raises(UpsideosEvmRwaArtifacts::UnknownFile) { UpsideosEvmRwaArtifacts.artifact('v5', 'NoSuchContract') }
   end
 end
