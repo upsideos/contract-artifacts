@@ -14,6 +14,7 @@ import {
 } from './config'
 import { parseManifest, sha256Canonical } from './manifest'
 import { diffGeneratedAbis, generateAbisForRelease } from './generate_abis'
+import { generateTypedAbisForRelease } from './typed_abis'
 
 export interface AuditFinding {
   path: string
@@ -149,13 +150,46 @@ function auditConsumerCopies(entry: ReleaseCatalogEntry): AuditFinding[] {
   )
 }
 
+// The typed modules carry the ABI a second time, as a literal type. A
+// consumer reads the names off that type and the bytes off the JSON, so a
+// declaration left behind by a repack would typecheck against an ABI the
+// contract no longer has.
+function auditTypedAbis(entry: ReleaseCatalogEntry): AuditFinding[] {
+  // A release with nothing packed has no ABIs to compare against, and
+  // auditPackedRelease already reports it. Returning here keeps one
+  // unpacked release from ending the audit of every other one.
+  const releaseDir = resolveReleaseDir(entry)
+  if (
+    releaseDir === undefined ||
+    !existsSync(join(releaseDir, 'manifest.json'))
+  ) {
+    return []
+  }
+
+  return diffGeneratedAbis(
+    generateTypedAbisForRelease(entry),
+    entry.configRoot,
+  ).map(diff => ({
+    path: diff.path,
+    ok: diff.status === 'match',
+    message:
+      diff.status === 'match'
+        ? 'typed ABI matches the shipped JSON'
+        : `typed ABI ${diff.status}`,
+  }))
+}
+
 export function auditRelease(
   releaseId: string,
   configRoot?: string,
 ): AuditReport {
   const root = configRoot ?? findConfigRoot()
   const entry = getRelease(releaseId, root)
-  const findings = [...auditPackedRelease(entry), ...auditConsumerCopies(entry)]
+  const findings = [
+    ...auditPackedRelease(entry),
+    ...auditConsumerCopies(entry),
+    ...auditTypedAbis(entry),
+  ]
   return {
     releaseId,
     ok: findings.every(f => f.ok),

@@ -7,6 +7,7 @@ import { join } from 'node:path'
 import { mergeAbis, type AbiEntry } from './abi_merge'
 import type { LoadedArtifact } from './artifacts'
 import { canonicalize } from './canonical'
+import { writeTypedAbiModules } from './typed_abis'
 import type { VerifyReport } from './verify'
 
 export function writeReleaseFiles(
@@ -59,6 +60,11 @@ export function writeReleaseFiles(
       'utf8',
     )
   }
+
+  // The typed modules read the files above, so they go out with them. A
+  // release that shipped one without the other would let a consumer
+  // typecheck against an ABI the contract does not have.
+  writeTypedAbiModules(outDir)
 }
 
 export function writeReleaseIndex(outDir: string, names: string[]): void {

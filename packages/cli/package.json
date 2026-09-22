@@ -34,6 +34,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
+    "abitype": "^1.3.0",
     "eslint-config-love": "^83.0.0",
     "eslint-plugin-import": "^2.30.0",
     "eslint-plugin-n": "^17.10.3",

@@ -1,6 +1,8 @@
 node_modules
 dist
 coverage
+# Scratch directory the typed ABI test compiles in.
+typed-abis-check-*
 *.js
 !jest.config.js
 !eslint.config.cjs

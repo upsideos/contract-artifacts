@@ -1,6 +1,6 @@
 {
   "name": "@upsideos/evm-rwa-artifacts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Audited EVM Security Token bytecode, ABIs, and verification sources",
   "keywords": [
     "ethereum",
@@ -35,6 +35,14 @@
     },
     "./v5/manifest.json": "./releases/v5/manifest.json",
     "./v5/artifacts/*.json": "./releases/v5/artifacts/*.json",
+    "./v5/abis": {
+      "types": "./releases/v5/typed/abis.d.ts",
+      "default": "./releases/v5/typed/abis.js"
+    },
+    "./v5/abis/merged": {
+      "types": "./releases/v5/typed/merged.d.ts",
+      "default": "./releases/v5/typed/merged.js"
+    },
     "./v5/abis/*.json": "./releases/v5/abi/*.json",
     "./v5/verification-source-codes.json": "./releases/v5/verification-source-codes.json",
     "./v5.1": {
@@ -43,6 +51,14 @@
     },
     "./v5.1/manifest.json": "./releases/v5.1/manifest.json",
     "./v5.1/artifacts/*.json": "./releases/v5.1/artifacts/*.json",
+    "./v5.1/abis": {
+      "types": "./releases/v5.1/typed/abis.d.ts",
+      "default": "./releases/v5.1/typed/abis.js"
+    },
+    "./v5.1/abis/merged": {
+      "types": "./releases/v5.1/typed/merged.d.ts",
+      "default": "./releases/v5.1/typed/merged.js"
+    },
     "./v5.1/abis/*.json": "./releases/v5.1/abi/*.json",
     "./v5.1/verification-source-codes.json": "./releases/v5.1/verification-source-codes.json",
     "./recallable-payment": {
@@ -51,6 +67,10 @@
     },
     "./recallable-payment/manifest.json": "./releases/recallable-payment/manifest.json",
     "./recallable-payment/artifacts/*.json": "./releases/recallable-payment/artifacts/*.json",
+    "./recallable-payment/abis": {
+      "types": "./releases/recallable-payment/typed/abis.d.ts",
+      "default": "./releases/recallable-payment/typed/abis.js"
+    },
     "./recallable-payment/abis/*.json": "./releases/recallable-payment/abi/*.json",
     "./recallable-payment/verification-source-codes.json": "./releases/recallable-payment/verification-source-codes.json",
     "./releases/*": "./releases/*",
