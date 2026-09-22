@@ -1,6 +1,7 @@
 # upsideos_evm_rwa_artifacts
 
-ABIs and verification sources for the audited EVM Security Token releases.
+ABIs, creation code and verification sources for the audited EVM Security
+Token releases.
 
 The gem carries data only. It has no dependencies, and it ships the same
 files as the `@upsideos/evm-rwa-artifacts` npm package, built from the
@@ -36,6 +37,17 @@ call surface when you talk to the token address:
 UpsideosEvmRwaArtifacts.merged_abi('v5', 'RestrictedLockupToken')
 ```
 
+## Deploy a contract
+
+`artifact` returns the ABI together with the creation code, in the shape a
+deployment front end reads. `bytecode` returns the creation code alone, as
+the 0x-prefixed hex a deployment transaction carries:
+
+```ruby
+UpsideosEvmRwaArtifacts.artifact('v5.1', 'RestrictedLockupToken')
+UpsideosEvmRwaArtifacts.bytecode('v5.1', 'RestrictedLockupToken')
+```
+
 ## Verify a deployment
 
 `verification_source_codes` returns the solc standard-json bundle that an
@@ -69,9 +81,8 @@ Digest::SHA256.hexdigest(path.binread)
 
 ## What the gem leaves out
 
-The gem ships no bytecode and no tooling, because a Ruby consumer reads
-contracts and verifies them but does not compile or deploy them. Use the
-npm package for deployment bytecode, and `@upsideos/evm-explorer-verify`
+The gem ships no tooling, because a Ruby consumer reads contracts and
+hands them on but does not compile them. Use `@upsideos/evm-explorer-verify`
 to submit a verification to an explorer.
 
 ## Notes
