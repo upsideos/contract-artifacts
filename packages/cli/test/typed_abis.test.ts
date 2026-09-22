@@ -1,6 +1,8 @@
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { auditRelease } from '../src/audit'
 import { findConfigRoot, getRelease } from '../src/config'
 import {
   exportName,
@@ -104,6 +106,46 @@ describe('generateTypedAbisForRelease', () => {
       'releases/recallable-payment/typed/abis.d.ts',
       'releases/recallable-payment/typed/abis.js',
     ])
+  })
+
+  // One release with nothing packed used to end the audit of every other
+  // one, because generating its modules threw rather than reporting.
+  it('lets the audit report an unpacked release instead of throwing', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'unpacked-'))
+
+    try {
+      writeFileSync(
+        join(dir, 'contract-artifacts.config.json'),
+        JSON.stringify({
+          schemaVersion: '1.0',
+          defaultRelease: 'evm/test/1',
+          releases: {
+            'evm/test/1': {
+              chainFamily: 'evm',
+              artifactsDir: 'artifacts-flat',
+              source: {
+                repository: 'https://github.com/example/contracts',
+                commit: '0'.repeat(40),
+              },
+              audit: { status: 'unaudited' },
+              artifacts: ['AccessControl'],
+              callSurfaces: [],
+              vendorCopies: [],
+            },
+          },
+        }),
+        'utf8',
+      )
+
+      const report = auditRelease('evm/test/1', dir)
+
+      expect(report.ok).toBe(false)
+      expect(report.findings.map(f => f.message)).toEqual([
+        'release has no packed directory',
+      ])
+    } finally {
+      rmSync(dir, { recursive: true, force: true })
+    }
   })
 
   // The point of these modules is that abitype can read the names. Only

@@ -155,6 +155,17 @@ function auditConsumerCopies(entry: ReleaseCatalogEntry): AuditFinding[] {
 // declaration left behind by a repack would typecheck against an ABI the
 // contract no longer has.
 function auditTypedAbis(entry: ReleaseCatalogEntry): AuditFinding[] {
+  // A release with nothing packed has no ABIs to compare against, and
+  // auditPackedRelease already reports it. Returning here keeps one
+  // unpacked release from ending the audit of every other one.
+  const releaseDir = resolveReleaseDir(entry)
+  if (
+    releaseDir === undefined ||
+    !existsSync(join(releaseDir, 'manifest.json'))
+  ) {
+    return []
+  }
+
   return diffGeneratedAbis(
     generateTypedAbisForRelease(entry),
     entry.configRoot,
