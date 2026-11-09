@@ -340,6 +340,827 @@ export declare const accessControlAbi: readonly [
     readonly type: "function";
   }
 ];
+export declare const dividendsAbi: readonly [
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "accessControl_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "trustedForwarder_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "restrictedLockupToken_";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "nonpayable";
+    readonly type: "constructor";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_AlreadyClaimed";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "totalSupplyAt";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "Dividends_IndivisibleAmount";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidAmount";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidArrayLengths";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidFeeApplied";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidReclaimerAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidRestrictedLockupTokenAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidSnapshotId";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidSnapshotPeriodsAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_InvalidTokenAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint8";
+        readonly name: "restrictedLockupTokenDecimals";
+        readonly type: "uint8";
+      }
+    ];
+    readonly name: "Dividends_InvalidTokenDecimals";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "claimableFunds";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "claimedFunds";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "Dividends_InvalidUnclaimedBalance";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_NoFundsToClaim";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_NoRemainingUnclaimedBalance";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_NotEnoughFundsToClaim";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "wallet";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "Dividends_WalletFrozen";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "Dividends_ZeroTotalSupply";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "addr";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "EasyAccessControl_DoesNotHaveContractAdminRole";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "addr";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "EasyAccessControl_DoesNotHaveContractOrTransferAdminRole";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "addr";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "EasyAccessControl_DoesNotHaveTransferAdminRole";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "EasyAccessControl_InvalidZeroAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "EnforcedPause";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "ExpectedPause";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "ReentrancyGuardReentrantCall";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "SafeERC20FailedOperation";
+    readonly type: "error";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "payee";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "token";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "timestamp";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "DividendClaimed";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "payer";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "token";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "timestamp";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "DividendFunded";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "payee";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "target";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "token";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "timestamp";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "DividendReclaimed";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: false;
+        readonly internalType: "address";
+        readonly name: "account";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "Paused";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "newReclaimer";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "ReclaimerAddressChanged";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: false;
+        readonly internalType: "address";
+        readonly name: "account";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "Unpaused";
+    readonly type: "event";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "CONTRACT_ADMIN_ROLE";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint8";
+        readonly name: "";
+        readonly type: "uint8";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "TRANSFER_ADMIN_ROLE";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint8";
+        readonly name: "";
+        readonly type: "uint8";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "accessControl";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "contract IAccessControl";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "sender_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "balanceOfAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256[]";
+        readonly name: "timestamps_";
+        readonly type: "uint256[]";
+      },
+      {
+        readonly internalType: "uint256[]";
+        readonly name: "amounts_";
+        readonly type: "uint256[]";
+      }
+    ];
+    readonly name: "batchClaimDividend";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "claimDividend";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "receiver_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "claimedBalanceAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount_";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "fundDividend";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "fundsAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount_";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "isAmountDivisible";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "isDivisible_";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "forwarder";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "isTrustedForwarder";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "isPaused_";
+        readonly type: "bool";
+      }
+    ];
+    readonly name: "pause";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "paused";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "targetAddress_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "reclaimDividend";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount_";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "reclaimTotalDividend";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "reclaimerAddress";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "restrictedLockupToken";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "contract IRestrictedLockupToken";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "newReclaimerAddress";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "setReclaimerAddress";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "snapshotPeriods";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "contract ISnapshotPeriods";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "tokensAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "receiver_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "totalAwardedBalanceAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "totalSupplyAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "trustedForwarder";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "token_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "receiver_";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "timestamp_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "unclaimedBalanceAt";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "_unclaimedBalanceAt";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  }
+];
 export declare const erc2771CustomForwarderAbi: readonly [
   {
     readonly inputs: readonly [
@@ -393,11 +1214,6 @@ export declare const erc2771CustomForwarderAbi: readonly [
       }
     ];
     readonly name: "ERC2771CustomForwarder_MismatchedValue";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "ERC2771CustomForwarder_NonZeroValueNotAllowed";
     readonly type: "error";
   },
   {
@@ -1964,18 +2780,19 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "error";
   },
   {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "need";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestPayment_AmountAboveNeed";
+    readonly type: "error";
+  },
+  {
     readonly inputs: readonly [];
     readonly name: "InterestPayment_CannotReclaimAllForOngoingPeriod";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_CannotUnpauseAfterMaturity";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_DividendsAlreadyClaimed";
     readonly type: "error";
   },
   {
@@ -1991,33 +2808,17 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "uint8";
-        readonly name: "securityTokenDecimals";
-        readonly type: "uint8";
-      },
-      {
-        readonly internalType: "uint8";
-        readonly name: "paymentTokenDecimals";
-        readonly type: "uint8";
-      }
-    ];
-    readonly name: "InterestPayment_IncompatibleTokenDecimals";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [
-      {
         readonly internalType: "uint256";
-        readonly name: "paymentTokenAmount";
+        readonly name: "allowance";
         readonly type: "uint256";
       },
       {
         readonly internalType: "uint256";
-        readonly name: "totalSupplyAt";
+        readonly name: "required";
         readonly type: "uint256";
       }
     ];
-    readonly name: "InterestPayment_IndivisibleAmount";
+    readonly name: "InterestPayment_InsufficientBurnAllowance";
     readonly type: "error";
   },
   {
@@ -2053,21 +2854,6 @@ export declare const interestPaymentAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "InterestPayment_InvalidArrayLengths";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_InvalidDividendSnapshotId";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_InvalidDividendTokenAddress";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "InterestPayment_InvalidFeeApplied";
     readonly type: "error";
   },
@@ -2089,6 +2875,11 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "InterestPayment_InvalidInterestRatePeriodDuration";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "InterestPayment_InvalidMaxInterestRate";
     readonly type: "error";
   },
   {
@@ -2118,11 +2909,6 @@ export declare const interestPaymentAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "InterestPayment_InvalidRecipientAddress";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "InterestPayment_InvalidReclaimerAddress";
     readonly type: "error";
   },
@@ -2133,50 +2919,12 @@ export declare const interestPaymentAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "InterestPayment_InvalidSnapshotPeriodsAddress";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "InterestPayment_InvalidTimestamp";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint8";
-        readonly name: "restrictedLockupTokenDecimals";
-        readonly type: "uint8";
-      }
-    ];
-    readonly name: "InterestPayment_InvalidTokenDecimals";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "claimableFunds";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "claimedFunds";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "InterestPayment_InvalidUnclaimedAmount";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "claimableFunds";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "claimedFunds";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "InterestPayment_InvalidUnclaimedDividendBalance";
     readonly type: "error";
   },
   {
@@ -2191,17 +2939,17 @@ export declare const interestPaymentAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "InterestPayment_MissingSoftBurnRole";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "InterestPayment_NoFundsToClaim";
     readonly type: "error";
   },
   {
     readonly inputs: readonly [];
     readonly name: "InterestPayment_NoPaymentPeriods";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_NoRemainingUnclaimedDividendBalance";
     readonly type: "error";
   },
   {
@@ -2246,8 +2994,51 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "error";
   },
   {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "funds";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "required";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestPayment_PeriodInterestNotFullyFunded";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestPayment_PeriodNotFinished";
+    readonly type: "error";
+  },
+  {
     readonly inputs: readonly [];
     readonly name: "InterestPayment_PeriodNotNext";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "nextIdx";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestPayment_PeriodNotNextToPay";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "InterestPayment_PeriodStartsAfterAccrualEnd";
     readonly type: "error";
   },
   {
@@ -2275,23 +3066,7 @@ export declare const interestPaymentAbi: readonly [
     readonly inputs: readonly [
       {
         readonly internalType: "uint256";
-        readonly name: "provided";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "maximum";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "InterestPayment_PrincipalFundingExceedsEntitlement";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "funded";
+        readonly name: "unusedPrincipal";
         readonly type: "uint256";
       },
       {
@@ -2300,7 +3075,23 @@ export declare const interestPaymentAbi: readonly [
         readonly type: "uint256";
       }
     ];
-    readonly name: "InterestPayment_PrincipalNotFullyFunded";
+    readonly name: "InterestPayment_PrincipalFundingExceedsRequired";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "InterestPayment_PrincipalRedemptionStarted";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "surplus";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestPayment_ReclaimAboveSurplus";
     readonly type: "error";
   },
   {
@@ -2319,8 +3110,14 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "error";
   },
   {
-    readonly inputs: readonly [];
-    readonly name: "InterestPayment_ZeroTotalSupply";
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "wallet";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "InterestPayment_WalletFrozen";
     readonly type: "error";
   },
   {
@@ -2362,105 +3159,6 @@ export declare const interestPaymentAbi: readonly [
       }
     ];
     readonly name: "Claimed";
-    readonly type: "event";
-  },
-  {
-    readonly anonymous: false;
-    readonly inputs: readonly [
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "payee";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "token";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: false;
-        readonly internalType: "uint256";
-        readonly name: "amount";
-        readonly type: "uint256";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "uint256";
-        readonly name: "timestamp";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "DividendClaimed";
-    readonly type: "event";
-  },
-  {
-    readonly anonymous: false;
-    readonly inputs: readonly [
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "payer";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "token";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: false;
-        readonly internalType: "uint256";
-        readonly name: "amount";
-        readonly type: "uint256";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "uint256";
-        readonly name: "timestamp";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "DividendFunded";
-    readonly type: "event";
-  },
-  {
-    readonly anonymous: false;
-    readonly inputs: readonly [
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "payee";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "target";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: true;
-        readonly internalType: "address";
-        readonly name: "token";
-        readonly type: "address";
-      },
-      {
-        readonly indexed: false;
-        readonly internalType: "uint256";
-        readonly name: "amount";
-        readonly type: "uint256";
-      },
-      {
-        readonly indexed: false;
-        readonly internalType: "uint256";
-        readonly name: "timestamp";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "DividendReclaimed";
     readonly type: "event";
   },
   {
@@ -2549,6 +3247,25 @@ export declare const interestPaymentAbi: readonly [
       }
     ];
     readonly name: "InterestAccrualEndShifted";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "paymentPeriodIdx";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "interestRatePeriodDuration";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "InterestRatePeriodDurationSet";
     readonly type: "event";
   },
   {
@@ -2650,6 +3367,44 @@ export declare const interestPaymentAbi: readonly [
     readonly inputs: readonly [
       {
         readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "funds";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "PeriodFundsChanged";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "funds";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "PeriodPaid";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
         readonly internalType: "address";
         readonly name: "admin";
         readonly type: "address";
@@ -2662,6 +3417,25 @@ export declare const interestPaymentAbi: readonly [
       }
     ];
     readonly name: "PeriodPaused";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "funds";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "PeriodUnpaid";
     readonly type: "event";
   },
   {
@@ -2708,7 +3482,7 @@ export declare const interestPaymentAbi: readonly [
       {
         readonly indexed: false;
         readonly internalType: "uint256";
-        readonly name: "total";
+        readonly name: "amount";
         readonly type: "uint256";
       }
     ];
@@ -2845,6 +3619,19 @@ export declare const interestPaymentAbi: readonly [
       }
     ];
     readonly name: "SetMaxInterestRate";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "UnassignedInterestChanged";
     readonly type: "event";
   },
   {
@@ -3091,53 +3878,6 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "address";
-        readonly name: "sender_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "balanceOfAt";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256[]";
-        readonly name: "timestamps_";
-        readonly type: "uint256[]";
-      },
-      {
-        readonly internalType: "uint256[]";
-        readonly name: "amounts_";
-        readonly type: "uint256[]";
-      }
-    ];
-    readonly name: "batchClaimDividend";
-    readonly outputs: readonly [];
-    readonly stateMutability: "nonpayable";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
         readonly internalType: "uint256[]";
         readonly name: "paymentPeriodIdxs";
         readonly type: "uint256[]";
@@ -3231,29 +3971,6 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "amount_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "claimDividend";
-    readonly outputs: readonly [];
-    readonly stateMutability: "nonpayable";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
         readonly internalType: "uint256";
         readonly name: "amount";
         readonly type: "uint256";
@@ -3320,24 +4037,8 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "address";
-        readonly name: "receiver_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "claimedBalanceAt";
+    readonly inputs: readonly [];
+    readonly name: "claimedPrincipalAmount";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -3349,8 +4050,14 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
-    readonly inputs: readonly [];
-    readonly name: "claimedPrincipalAmount";
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "account";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "claimedPrincipalOf";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -3488,22 +4195,12 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
         readonly internalType: "uint256";
-        readonly name: "amount_";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
+        readonly name: "amount";
         readonly type: "uint256";
       }
     ];
-    readonly name: "fundDividend";
+    readonly name: "fundInterest";
     readonly outputs: readonly [];
     readonly stateMutability: "nonpayable";
     readonly type: "function";
@@ -3514,9 +4211,32 @@ export declare const interestPaymentAbi: readonly [
         readonly internalType: "uint256";
         readonly name: "amount";
         readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
       }
     ];
-    readonly name: "fundInterest";
+    readonly name: "fundInterestForPeriod";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256[]";
+        readonly name: "periodIdxs";
+        readonly type: "uint256[]";
+      }
+    ];
+    readonly name: "fundInterestForPeriods";
     readonly outputs: readonly [];
     readonly stateMutability: "nonpayable";
     readonly type: "function";
@@ -3537,30 +4257,6 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "fundedPrincipalAmount";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "fundsAt";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -3598,6 +4294,25 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "interestRatePeriodDurationOf";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
     readonly inputs: readonly [];
     readonly name: "interestRatePeriodSeconds";
     readonly outputs: readonly [
@@ -3614,20 +4329,34 @@ export declare const interestPaymentAbi: readonly [
     readonly inputs: readonly [
       {
         readonly internalType: "uint256";
-        readonly name: "amount_";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
+        readonly name: "timestamp";
         readonly type: "uint256";
       }
     ];
-    readonly name: "isAmountDivisible";
+    readonly name: "isPaidThrough";
     readonly outputs: readonly [
       {
         readonly internalType: "bool";
-        readonly name: "isDivisible_";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "isPeriodPaid";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
         readonly type: "bool";
       }
     ];
@@ -3686,6 +4415,19 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
+    readonly inputs: readonly [];
+    readonly name: "paidPeriodsCount";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
     readonly inputs: readonly [
       {
         readonly internalType: "bool";
@@ -3732,6 +4474,38 @@ export declare const interestPaymentAbi: readonly [
         readonly internalType: "bool";
         readonly name: "";
         readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "account";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "payableInterestOf";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "paymentClockFloorTimestamp";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
       }
     ];
     readonly stateMutability: "view";
@@ -3933,6 +4707,44 @@ export declare const interestPaymentAbi: readonly [
         readonly type: "uint256";
       }
     ];
+    readonly name: "periodFundedInterest";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "periodPayableInterest";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      }
+    ];
     readonly name: "periodStartTimestamp";
     readonly outputs: readonly [
       {
@@ -4015,57 +4827,40 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
-    readonly inputs: readonly [];
-    readonly name: "principalAmountPerWholeToken";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "principalRedemptionOpen";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "bool";
-        readonly name: "";
-        readonly type: "bool";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
     readonly inputs: readonly [
       {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "address";
-        readonly name: "targetAddress_";
-        readonly type: "address";
-      },
-      {
         readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "amount_";
+        readonly name: "index";
         readonly type: "uint256";
       }
     ];
-    readonly name: "reclaimDividend";
-    readonly outputs: readonly [];
-    readonly stateMutability: "nonpayable";
+    readonly name: "principalRound";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "snapshotTimestamp";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "amount";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "principalRoundCount";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
     readonly type: "function";
   },
   {
@@ -4138,29 +4933,6 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "amount_";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "reclaimTotalDividend";
-    readonly outputs: readonly [];
-    readonly stateMutability: "nonpayable";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
         readonly internalType: "uint256";
         readonly name: "amount";
         readonly type: "uint256";
@@ -4216,6 +4988,25 @@ export declare const interestPaymentAbi: readonly [
         readonly internalType: "address";
         readonly name: "";
         readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "periodIdx";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "requiredInterestFunding";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "need";
+        readonly type: "uint256";
       }
     ];
     readonly stateMutability: "view";
@@ -4300,30 +5091,6 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "tokensAt";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
     readonly inputs: readonly [];
     readonly name: "totalAccruedInterest";
     readonly outputs: readonly [
@@ -4358,35 +5125,6 @@ export declare const interestPaymentAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "totalAvailablePrincipalAmount";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "address";
-        readonly name: "receiver_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "totalAwardedBalanceAt";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -4450,25 +5188,6 @@ export declare const interestPaymentAbi: readonly [
     readonly type: "function";
   },
   {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "totalSupplyAt";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
     readonly inputs: readonly [];
     readonly name: "trustedForwarder";
     readonly outputs: readonly [
@@ -4476,6 +5195,19 @@ export declare const interestPaymentAbi: readonly [
         readonly internalType: "address";
         readonly name: "";
         readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "unassignedInterest";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
       }
     ];
     readonly stateMutability: "view";
@@ -4522,36 +5254,7 @@ export declare const interestPaymentAbi: readonly [
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
-        readonly name: "_unclaimedAmountForPeriod";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "token_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "address";
-        readonly name: "receiver_";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "timestamp_";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "unclaimedBalanceAt";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "_unclaimedBalanceAt";
+        readonly name: "";
         readonly type: "uint256";
       }
     ];
@@ -4712,11 +5415,6 @@ export declare const purchaseContractAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "PurchaseContract_InvalidPurchaseId";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "PurchaseContract_InvalidTokenContract";
     readonly type: "error";
   },
@@ -4748,11 +5446,6 @@ export declare const purchaseContractAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "PurchaseContract_PurchaseIdAlreadyUsed";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "PurchaseContract_PurchaseIdCanceled";
     readonly type: "error";
   },
   {
@@ -4891,12 +5584,6 @@ export declare const purchaseContractAbi: readonly [
     readonly inputs: readonly [
       {
         readonly indexed: true;
-        readonly internalType: "string";
-        readonly name: "purchaseId";
-        readonly type: "string";
-      },
-      {
-        readonly indexed: true;
         readonly internalType: "address";
         readonly name: "authorityAddress";
         readonly type: "address";
@@ -4908,7 +5595,7 @@ export declare const purchaseContractAbi: readonly [
         readonly type: "address";
       },
       {
-        readonly indexed: false;
+        readonly indexed: true;
         readonly internalType: "address";
         readonly name: "canceledPurchaseWallet";
         readonly type: "address";
@@ -5013,11 +5700,6 @@ export declare const purchaseContractAbi: readonly [
   {
     readonly inputs: readonly [
       {
-        readonly internalType: "string";
-        readonly name: "purchaseId_";
-        readonly type: "string";
-      },
-      {
         readonly internalType: "address";
         readonly name: "paymentTokenAddress_";
         readonly type: "address";
@@ -5031,25 +5713,6 @@ export declare const purchaseContractAbi: readonly [
     readonly name: "cancelPurchase";
     readonly outputs: readonly [];
     readonly stateMutability: "nonpayable";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "string";
-        readonly name: "";
-        readonly type: "string";
-      }
-    ];
-    readonly name: "canceledPurchaseIds";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "bool";
-        readonly name: "";
-        readonly type: "bool";
-      }
-    ];
-    readonly stateMutability: "view";
     readonly type: "function";
   },
   {
@@ -5178,25 +5841,6 @@ export declare const purchaseContractAbi: readonly [
         readonly internalType: "contract IInterestPayment";
         readonly name: "";
         readonly type: "address";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "string";
-        readonly name: "purchaseId_";
-        readonly type: "string";
-      }
-    ];
-    readonly name: "isPurchaseIdCanceled";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "bool";
-        readonly name: "";
-        readonly type: "bool";
       }
     ];
     readonly stateMutability: "view";
@@ -5637,11 +6281,6 @@ export declare const restrictedLockupTokenAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "RestrictedLockupToken_BalanceCheckFailed";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_CannotExceedMaxTotalSupply";
     readonly type: "error";
   },
@@ -5763,6 +6402,11 @@ export declare const restrictedLockupTokenAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_InvalidInterestPayment";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_InvalidMinTimelockAmount";
     readonly type: "error";
   },
@@ -5878,6 +6522,11 @@ export declare const restrictedLockupTokenAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_MintAfterInterestAccrualEnd";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_MismatchedArrayLength";
     readonly type: "error";
   },
@@ -5946,6 +6595,17 @@ export declare const restrictedLockupTokenAbi: readonly [
       }
     ];
     readonly name: "RestrictedLockupToken_SenderCannotBeRecipient";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "RestrictedLockupToken_SoftBurnFromFrozen";
     readonly type: "error";
   },
   {
@@ -6165,6 +6825,31 @@ export declare const restrictedLockupTokenAbi: readonly [
       },
       {
         readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "oldInterestPayment";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "newInterestPayment";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "InterestPaymentSet";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
         readonly internalType: "bool";
         readonly name: "status";
         readonly type: "bool";
@@ -6321,6 +7006,31 @@ export declare const restrictedLockupTokenAbi: readonly [
       }
     ];
     readonly name: "SetMaxTotalSupply";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "bool";
+        readonly name: "enabled";
+        readonly type: "bool";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "pausedOnDaysAfterDeployment";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "SetRecordMintTimestamp";
     readonly type: "event";
   },
   {
@@ -8245,11 +8955,6 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "RestrictedLockupToken_BalanceCheckFailed";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_CannotExceedMaxTotalSupply";
     readonly type: "error";
   },
@@ -8371,6 +9076,11 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_InvalidInterestPayment";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_InvalidMinTimelockAmount";
     readonly type: "error";
   },
@@ -8486,6 +9196,11 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_MintAfterInterestAccrualEnd";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_MismatchedArrayLength";
     readonly type: "error";
   },
@@ -8554,6 +9269,17 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
       }
     ];
     readonly name: "RestrictedLockupToken_SenderCannotBeRecipient";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "RestrictedLockupToken_SoftBurnFromFrozen";
     readonly type: "error";
   },
   {
@@ -8773,6 +9499,31 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
       },
       {
         readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "oldInterestPayment";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "newInterestPayment";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "InterestPaymentSet";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
         readonly internalType: "bool";
         readonly name: "status";
         readonly type: "bool";
@@ -8929,6 +9680,31 @@ export declare const restrictedLockupTokenExtensionAbi: readonly [
       }
     ];
     readonly name: "SetMaxTotalSupply";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "bool";
+        readonly name: "enabled";
+        readonly type: "bool";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "pausedOnDaysAfterDeployment";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "SetRecordMintTimestamp";
     readonly type: "event";
   },
   {
@@ -10386,6 +11162,92 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly inputs: readonly [
       {
         readonly internalType: "address";
+        readonly name: "spender";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "allowance";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "needed";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "ERC20InsufficientAllowance";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "sender";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "balance";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "needed";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "ERC20InsufficientBalance";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "approver";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "ERC20InvalidApprover";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "receiver";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "ERC20InvalidReceiver";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "sender";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "ERC20InvalidSender";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "spender";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "ERC20InvalidSpender";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
         readonly name: "addr";
         readonly type: "address";
       }
@@ -10454,11 +11316,6 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_AmountLessThanReleaseCount";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "RestrictedLockupToken_BalanceCheckFailed";
     readonly type: "error";
   },
   {
@@ -10584,6 +11441,11 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_InvalidInterestPayment";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_InvalidMinTimelockAmount";
     readonly type: "error";
   },
@@ -10699,6 +11561,11 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_MintAfterInterestAccrualEnd";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_MismatchedArrayLength";
     readonly type: "error";
   },
@@ -10770,6 +11637,17 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly type: "error";
   },
   {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "RestrictedLockupToken_SoftBurnFromFrozen";
+    readonly type: "error";
+  },
+  {
     readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_TimelockCannotBeCanceled";
     readonly type: "error";
@@ -10836,6 +11714,31 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       }
     ];
     readonly name: "AppendHolderAddress";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "owner";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "spender";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "value";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "Approval";
     readonly type: "event";
   },
   {
@@ -10948,6 +11851,31 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       }
     ];
     readonly name: "HoldingTokenTypeUpdated";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "oldInterestPayment";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "newInterestPayment";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "InterestPaymentSet";
     readonly type: "event";
   },
   {
@@ -11117,6 +12045,31 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       }
     ];
     readonly name: "SetMaxTotalSupply";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "bool";
+        readonly name: "enabled";
+        readonly type: "bool";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "pausedOnDaysAfterDeployment";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "SetRecordMintTimestamp";
     readonly type: "event";
   },
   {
@@ -11335,6 +12288,31 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       {
         readonly indexed: true;
         readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "to";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "value";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "Transfer";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
         readonly name: "admin";
         readonly type: "address";
       },
@@ -11461,6 +12439,30 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly inputs: readonly [
       {
         readonly internalType: "address";
+        readonly name: "owner";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "spender";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "allowance";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
         readonly name: "addr_";
         readonly type: "address";
       },
@@ -11473,6 +12475,49 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly name: "appendHolderAddress";
     readonly outputs: readonly [];
     readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "spender";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "value";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "approve";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "account";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "balanceOf";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
     readonly type: "function";
   },
   {
@@ -11518,6 +12563,19 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       }
     ];
     readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "decimals";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint8";
+        readonly name: "";
+        readonly type: "uint8";
+      }
+    ];
+    readonly stateMutability: "view";
     readonly type: "function";
   },
   {
@@ -11785,6 +12843,19 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "interestPaymentAddress";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "";
+        readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "isPaused";
     readonly outputs: readonly [
       {
@@ -11919,6 +12990,19 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly type: "function";
   },
   {
+    readonly inputs: readonly [];
+    readonly name: "name";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "string";
+        readonly name: "";
+        readonly type: "string";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
     readonly inputs: readonly [
       {
         readonly internalType: "bool";
@@ -11929,35 +13013,6 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly name: "pause";
     readonly outputs: readonly [];
     readonly stateMutability: "nonpayable";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "address";
-        readonly name: "from";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "address";
-        readonly name: "to";
-        readonly type: "address";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "expectedTransferableAmount";
-        readonly type: "uint256";
-      }
-    ];
-    readonly name: "previewTransferableFromHoldings";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "transferableAmount";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
     readonly type: "function";
   },
   {
@@ -12112,6 +13167,19 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly type: "function";
   },
   {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "newInterestPayment";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "setInterestPayment";
+    readonly outputs: readonly [];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
     readonly inputs: readonly [];
     readonly name: "slotsPerWord";
     readonly outputs: readonly [
@@ -12151,6 +13219,19 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
     readonly type: "function";
   },
   {
+    readonly inputs: readonly [];
+    readonly name: "symbol";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "string";
+        readonly name: "";
+        readonly type: "string";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
     readonly inputs: readonly [
       {
         readonly internalType: "uint256";
@@ -12167,6 +13248,72 @@ export declare const restrictedLockupTokenManagementExtensionAbi: readonly [
       }
     ];
     readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [];
+    readonly name: "totalSupply";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "to";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "value";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "transfer";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "nonpayable";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "to";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "value";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "transferFrom";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "nonpayable";
     readonly type: "function";
   },
   {
@@ -12386,6 +13533,11 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupTokenStandardsExtension_DirectCall";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_AddressAlreadyHasHolder";
     readonly type: "error";
   },
@@ -12402,11 +13554,6 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_AmountLessThanReleaseCount";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "RestrictedLockupToken_BalanceCheckFailed";
     readonly type: "error";
   },
   {
@@ -12532,6 +13679,11 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_InvalidInterestPayment";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_InvalidMinTimelockAmount";
     readonly type: "error";
   },
@@ -12647,6 +13799,11 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedLockupToken_MintAfterInterestAccrualEnd";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedLockupToken_MismatchedArrayLength";
     readonly type: "error";
   },
@@ -12715,6 +13872,17 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
       }
     ];
     readonly name: "RestrictedLockupToken_SenderCannotBeRecipient";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "from";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "RestrictedLockupToken_SoftBurnFromFrozen";
     readonly type: "error";
   },
   {
@@ -12934,6 +14102,31 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
       },
       {
         readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "oldInterestPayment";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "newInterestPayment";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "InterestPaymentSet";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: true;
         readonly internalType: "bool";
         readonly name: "status";
         readonly type: "bool";
@@ -13090,6 +14283,31 @@ export declare const restrictedLockupTokenStandardsExtensionAbi: readonly [
       }
     ];
     readonly name: "SetMaxTotalSupply";
+    readonly type: "event";
+  },
+  {
+    readonly anonymous: false;
+    readonly inputs: readonly [
+      {
+        readonly indexed: true;
+        readonly internalType: "address";
+        readonly name: "admin";
+        readonly type: "address";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "bool";
+        readonly name: "enabled";
+        readonly type: "bool";
+      },
+      {
+        readonly indexed: false;
+        readonly internalType: "uint256";
+        readonly name: "pausedOnDaysAfterDeployment";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "SetRecordMintTimestamp";
     readonly type: "event";
   },
   {
@@ -14261,6 +15479,11 @@ export declare const restrictedSwapAbi: readonly [
   },
   {
     readonly inputs: readonly [];
+    readonly name: "RestrictedSwap_PendingBuysExceedBalance";
+    readonly type: "error";
+  },
+  {
+    readonly inputs: readonly [];
     readonly name: "RestrictedSwap_QuoteTokenMustNotSupportIERC1404";
     readonly type: "error";
   },
@@ -15027,6 +16250,25 @@ export declare const restrictedSwapAbi: readonly [
         readonly type: "uint256";
       }
     ];
+    readonly name: "isFillable";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "bool";
+        readonly name: "";
+        readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "swapNumber_";
+        readonly type: "uint256";
+      }
+    ];
     readonly name: "isOpenOrder";
     readonly outputs: readonly [
       {
@@ -15071,6 +16313,40 @@ export declare const restrictedSwapAbi: readonly [
         readonly internalType: "bool";
         readonly name: "";
         readonly type: "bool";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
+        readonly name: "maker";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "token";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "makerCoverage";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "reserved";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "allowance";
+        readonly type: "uint256";
+      },
+      {
+        readonly internalType: "uint256";
+        readonly name: "balance";
+        readonly type: "uint256";
       }
     ];
     readonly stateMutability: "view";
@@ -15157,6 +16433,30 @@ export declare const restrictedSwapAbi: readonly [
     readonly inputs: readonly [
       {
         readonly internalType: "address";
+        readonly name: "buyer";
+        readonly type: "address";
+      },
+      {
+        readonly internalType: "address";
+        readonly name: "seller";
+        readonly type: "address";
+      }
+    ];
+    readonly name: "pendingBuysOf";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "address";
         readonly name: "addr";
         readonly type: "address";
       }
@@ -15223,6 +16523,25 @@ export declare const restrictedSwapAbi: readonly [
         readonly internalType: "contract RestrictedLockupToken";
         readonly name: "";
         readonly type: "address";
+      }
+    ];
+    readonly stateMutability: "view";
+    readonly type: "function";
+  },
+  {
+    readonly inputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "swapNumber_";
+        readonly type: "uint256";
+      }
+    ];
+    readonly name: "settledRestrictedTokenAmount";
+    readonly outputs: readonly [
+      {
+        readonly internalType: "uint256";
+        readonly name: "";
+        readonly type: "uint256";
       }
     ];
     readonly stateMutability: "view";
@@ -16229,11 +17548,6 @@ export declare const transferRulesAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "TransferRules_LockDurationTooLarge";
-    readonly type: "error";
-  },
-  {
-    readonly inputs: readonly [];
     readonly name: "TransferRules_RecipientNotAmlKycPassed";
     readonly type: "error";
   },
@@ -16497,7 +17811,7 @@ export declare const transferRulesAbi: readonly [
   },
   {
     readonly inputs: readonly [];
-    readonly name: "MAX_LOCK_DURATION";
+    readonly name: "MAX_HOLDERS_REACHED";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -16511,19 +17825,6 @@ export declare const transferRulesAbi: readonly [
   {
     readonly inputs: readonly [];
     readonly name: "MAX_RESTRICTION_CODE";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [];
-    readonly name: "NEVER_UNLOCKS";
     readonly outputs: readonly [
       {
         readonly internalType: "uint256";
@@ -16938,72 +18239,6 @@ export declare const transferRulesAbi: readonly [
       {
         readonly internalType: "uint256";
         readonly name: "tokenType";
-        readonly type: "uint256";
-      }
-    ];
-    readonly stateMutability: "view";
-    readonly type: "function";
-  },
-  {
-    readonly inputs: readonly [
-      {
-        readonly internalType: "uint256";
-        readonly name: "tokenType";
-        readonly type: "uint256";
-      },
-      {
-        readonly components: readonly [
-          {
-            readonly internalType: "uint256[]";
-            readonly name: "regions";
-            readonly type: "uint256[]";
-          },
-          {
-            readonly internalType: "uint256";
-            readonly name: "accreditationType";
-            readonly type: "uint256";
-          },
-          {
-            readonly internalType: "uint256";
-            readonly name: "lastAmlKycChangeTimestamp";
-            readonly type: "uint256";
-          },
-          {
-            readonly internalType: "uint256";
-            readonly name: "lastAccreditationChangeTimestamp";
-            readonly type: "uint256";
-          },
-          {
-            readonly internalType: "bool";
-            readonly name: "amlKycPassed";
-            readonly type: "bool";
-          }
-        ];
-        readonly internalType: "struct IIdentityRegistry.IdentityInfo";
-        readonly name: "recipientIdentity";
-        readonly type: "tuple";
-      },
-      {
-        readonly internalType: "bool";
-        readonly name: "isAmlKycPassed";
-        readonly type: "bool";
-      }
-    ];
-    readonly name: "eligibilityThresholdFor";
-    readonly outputs: readonly [
-      {
-        readonly internalType: "bool";
-        readonly name: "allowed";
-        readonly type: "bool";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "maxEligibleMintTimestamp";
-        readonly type: "uint256";
-      },
-      {
-        readonly internalType: "uint256";
-        readonly name: "failureCode";
         readonly type: "uint256";
       }
     ];

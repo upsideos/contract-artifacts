@@ -5,6 +5,7 @@ export interface ContractArtifact {
   immutableReferences?: Record<string, Array<{ start: number; length: number }>>
 }
 export const AccessControl: ContractArtifact
+export const Dividends: ContractArtifact
 export const ERC2771CustomForwarder: ContractArtifact
 export const IdentityRegistry: ContractArtifact
 export const InterestPayment: ContractArtifact

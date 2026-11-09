@@ -4,6 +4,7 @@
 // The ABI of each contract in this release, as its own declaration.
 'use strict'
 exports.accessControlAbi = require('../abi/AccessControl.json')
+exports.dividendsAbi = require('../abi/Dividends.json')
 exports.erc2771CustomForwarderAbi = require('../abi/ERC2771CustomForwarder.json')
 exports.identityRegistryAbi = require('../abi/IdentityRegistry.json')
 exports.interestPaymentAbi = require('../abi/InterestPayment.json')
