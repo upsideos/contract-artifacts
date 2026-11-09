@@ -45,13 +45,14 @@
       "chainFamily": "evm",
       "tokenType": "comakery_security_token_v5_1",
       "source": {
-        "commit": "921ed469fd1015926dbed73067c93d032adeadc5"
+        "commit": "be62b59af6d8d4b476b93275c4a0d0c99ea731a8"
       },
       "audit": {
         "status": "unaudited"
       },
       "artifacts": [
         "AccessControl",
+        "Dividends",
         "ERC2771CustomForwarder",
         "IdentityRegistry",
         "InterestPayment",

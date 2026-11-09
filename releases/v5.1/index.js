@@ -1,6 +1,7 @@
 'use strict'
 const artifacts = {
   AccessControl: require('./artifacts/AccessControl.json'),
+  Dividends: require('./artifacts/Dividends.json'),
   ERC2771CustomForwarder: require('./artifacts/ERC2771CustomForwarder.json'),
   IdentityRegistry: require('./artifacts/IdentityRegistry.json'),
   InterestPayment: require('./artifacts/InterestPayment.json'),
