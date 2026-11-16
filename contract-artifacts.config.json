@@ -98,6 +98,48 @@
       ],
       "callSurfaces": [],
       "releaseDir": "releases/recallable-payment"
+    },
+    "evm/comakery_security_token_v5_1/2026-11-16-halborn": {
+      "chainFamily": "evm",
+      "tokenType": "comakery_security_token_v5_1",
+      "releasedAt": "2026-11-16",
+      "source": {
+        "commit": "be62b59af6d8d4b476b93275c4a0d0c99ea731a8"
+      },
+      "audit": {
+        "status": "audited",
+        "auditor": "Halborn",
+        "commit": "6aba12cb064d4c5390a101fa9005891e05c07c8f",
+        "reportSha256": "01bb8af98560e75d6163980b0b75092de8ba10c465a9f9537a7f85919e3b42ce",
+        "completedAt": "2026-09-29"
+      },
+      "artifacts": [
+        "AccessControl",
+        "Dividends",
+        "ERC2771CustomForwarder",
+        "IdentityRegistry",
+        "InterestPayment",
+        "PurchaseContract",
+        "RestrictedLockupToken",
+        "RestrictedLockupTokenExtension",
+        "RestrictedLockupTokenManagementExtension",
+        "RestrictedLockupTokenStandardsExtension",
+        "RestrictedSwap",
+        "SnapshotPeriods",
+        "TransferRules"
+      ],
+      "callSurfaces": [
+        {
+          "name": "RestrictedLockupToken",
+          "mergedFrom": [
+            "RestrictedLockupToken",
+            "RestrictedLockupTokenExtension",
+            "RestrictedLockupTokenManagementExtension",
+            "RestrictedLockupTokenStandardsExtension"
+          ]
+        }
+      ],
+      "releaseDir": "releases/v5.1"
     }
   }
 }
