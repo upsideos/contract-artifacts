@@ -73,7 +73,10 @@ describe('generateTypedAbisForRelease', () => {
 
   it('writes a declaration and a runtime file per module', () => {
     const files = generateTypedAbisForRelease(
-      getRelease('evm/comakery_security_token_v5_1/unreleased', configRoot),
+      getRelease(
+        'evm/comakery_security_token_v5_1/2026-11-16-halborn',
+        configRoot,
+      ),
     )
 
     expect(files.map(f => f.path)).toEqual([
@@ -88,7 +91,10 @@ describe('generateTypedAbisForRelease', () => {
   // bytes are in the package once however many modules name them.
   it('reads the shipped JSON at run time rather than inlining it', () => {
     const files = generateTypedAbisForRelease(
-      getRelease('evm/comakery_security_token_v5_1/unreleased', configRoot),
+      getRelease(
+        'evm/comakery_security_token_v5_1/2026-11-16-halborn',
+        configRoot,
+      ),
     )
     const runtime = files.find(f => f.path.endsWith('merged.js'))
 
@@ -152,7 +158,10 @@ describe('generateTypedAbisForRelease', () => {
   // the compiler can say whether it can, so ask it.
   it('emits a declaration abitype accepts', () => {
     const files = generateTypedAbisForRelease(
-      getRelease('evm/comakery_security_token_v5_1/unreleased', configRoot),
+      getRelease(
+        'evm/comakery_security_token_v5_1/2026-11-16-halborn',
+        configRoot,
+      ),
     )
     const declaration = files.find(f => f.path.endsWith('merged.d.ts'))
     // Inside the package, so that `abitype` resolves the way it does for
